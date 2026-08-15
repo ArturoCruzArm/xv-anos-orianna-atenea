@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Invitación a los XV años de Orianna Atenea García Loera - 21 de noviembre de 2026">
+    <meta name="theme-color" content="#061a22">
+    <title>XV Años - Orianna Atenea García Loera</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+    <link rel="stylesheet" href="css/index.css?v=1">
+
+</head>
+<body>
+
+<!-- ─── Gala Intro Screen ────────────────────────────────────── -->
+<div id="envelope-screen" role="button" aria-label="Abrir invitación" tabindex="0">
+    <div class="stars-layer" id="starsLayer"></div>
+    <div id="particlesLayer" aria-hidden="true"></div>
+
+    <div class="env-wrap">
+        <div id="envelope" class="opening-card" aria-hidden="true">
+            <span class="card-corner card-corner-tl"></span>
+            <span class="card-corner card-corner-tr"></span>
+            <span class="card-corner card-corner-bl"></span>
+            <span class="card-corner card-corner-br"></span>
+            <p class="card-kicker">MIS XV AÑOS</p>
+            <div class="card-monogram">A</div>
+            <p class="card-name">Orianna Atenea</p>
+            <p class="card-surname">GARCÍA LOERA</p>
+            <div class="card-rule"><span>✦</span></div>
+            <time class="card-date" datetime="2026-11-21">21 · 11 · 2026</time>
+            <span class="card-open-label">Abrir invitación</span>
+        </div>
+
+        <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Toca para comenzar</p>
+    </div>
+</div>
+
+<!-- ─── Audio ────────────────────────────────────────────────── -->
+<div id="youtube-player" aria-hidden="true"></div>
+<script defer src="https://www.youtube.com/iframe_api"></script>
+
+<!-- ─── Music button ─────────────────────────────────────────── -->
+<button id="music-btn" aria-label="Pausar música">
+    <i class="fas fa-music" id="music-icon"></i>
+</button>
+
+<!-- ─── Floating decorations ─────────────────────────────────── -->
+<div class="floating-element" style="left:6%;  --fdelay:0s;"  aria-hidden="true">✦</div>
+<div class="floating-element" style="left:26%; --fdelay:7s;"  aria-hidden="true">·</div>
+<div class="floating-element" style="left:50%; --fdelay:14s;" aria-hidden="true">✧</div>
+<div class="floating-element" style="left:74%; --fdelay:21s;" aria-hidden="true">·</div>
+<div class="floating-element" style="left:90%; --fdelay:4s;"  aria-hidden="true">✦</div>
+
+<!-- ─── Invitation content ───────────────────────────────────── -->
+<div id="invitation">
+    <div class="container">
+
+        <header>
+            <div class="hero-photo-wrap">
+                <img src="atenea.svg" alt="XV Años Orianna Atenea García Loera" class="hero-photo" loading="eager">
+            </div>
+            <div class="divider" aria-hidden="true"></div>
+        </header>
+
+        <div class="quote reveal" data-campo="invitacion-frase">
+            "Hoy dejo atrás mi niñez y comienzo un nuevo sueño lleno de ilusiones y esperanzas.
+            Te invito a compartir este momento mágico conmigo."
+        </div>
+
+        <!-- Cuenta Regresiva -->
+        <section class="reveal">
+            <h2 class="section-title">Cuenta Regresiva</h2>
+            <div class="countdown-grid" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Con la bendición de -->
+        <section class="reveal">
+            <h2 class="section-title">Con la Bendición de</h2>
+            <div class="family-card">
+                <div class="family-icon" aria-hidden="true"><i class="fas fa-heart"></i></div>
+                <div class="family-role">Con la bendición de mis padres</div>
+                <div class="family-names">
+                    <span data-campo="padre-nombre">Mi papá</span><br>
+                    &amp; <span data-campo="madre-nombre">Mi mamá</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Padrinos -->
+        <section class="reveal">
+            <h2 class="section-title">Mis Padrinos</h2>
+            <div class="family-card">
+                <div class="family-icon" aria-hidden="true"><i class="fas fa-handshake"></i></div>
+                <div class="family-role">Padrinos de honor</div>
+                <div class="family-names">
+                    <span data-campo="padrinos-madrina">Mi madrina</span><br>
+                    &amp; <span data-campo="padrinos-padrino">Mi padrino</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detalles del evento -->
+        <section class="reveal">
+            <h2 class="section-title">Detalles del Evento</h2>
+            <div class="event-grid">
+                <div class="event-card">
+                    <span class="event-icon" aria-hidden="true"><i class="fas fa-church"></i></span>
+                    <h3 class="event-title">Misa de Acción de Gracias</h3>
+                    <div class="event-info">
+                        <strong>Fecha</strong>
+                        Sábado, 21 de Noviembre de 2026
+                    </div>
+                    <div class="event-info">
+                        <strong>Templo</strong>
+                        <span data-campo="ceremonia-lugar">Parroquia San Pío X</span>
+                    </div>
+                    <div class="event-info" id="ceremonia-hora-info">
+                        <strong>Horario</strong>
+                        <span data-campo="ceremonia-hora">7:00 PM</span>
+                    </div>
+                    <a class="location-btn" data-campo="ceremonia-maps" href="https://www.google.com/maps/search/?api=1&query=Parroquia+San+Pio+X+Leon+Guanajuato" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-location-dot" aria-hidden="true"></i> Ver ubicación
+                    </a>
+                </div>
+
+                <div class="event-card">
+                    <span class="event-icon" aria-hidden="true"><i class="fas fa-champagne-glasses"></i></span>
+                    <h3 class="event-title">Recepción y Fiesta</h3>
+                    <div class="event-info">
+                        <strong>Fecha</strong>
+                        Sábado, 21 de Noviembre de 2026
+                    </div>
+                    <div class="event-info">
+                        <strong>Horario</strong>
+                        <span data-campo="recepcion-hora">8:30 PM</span> – <span data-campo="recepcion-hora-fin">2:00 AM</span>
+                    </div>
+                    <div class="event-info">
+                        <strong>Servicio de comida</strong>
+                        9:00 PM
+                    </div>
+                    <div class="event-info">
+                        <strong>Vals</strong>
+                        10:00 PM
+                    </div>
+                    <div class="event-info">
+                        <strong>Salón</strong>
+                        <span data-campo="recepcion-lugar">Terraza Poliforum</span><br><span data-campo="recepcion-direccion">León, Guanajuato</span>
+                    </div>
+                    <a class="location-btn" data-campo="recepcion-maps" href="https://www.google.com/maps/search/?api=1&query=Terraza+Poliforum+Leon+Guanajuato" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-location-dot" aria-hidden="true"></i> Ver ubicación
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Código de Vestimenta -->
+        <section class="reveal">
+            <h2 class="section-title">Código de Vestimenta</h2>
+            <div class="dress-code-box">
+                <div class="dress-icons" aria-hidden="true"><i class="fas fa-user-tie"></i><i class="fas fa-person-dress"></i></div>
+                <p class="dress-label" data-campo="vestimenta-tipo">FORMAL / ELEGANTE</p>
+                <p class="dress-sub">Te pedimos asistir con vestimenta formal para hacer de esta noche una ocasión especial</p>
+                <p class="reserved-color"><i class="fas fa-circle-exclamation" aria-hidden="true"></i> Invitadas: por favor, no usar <span data-campo="vestimenta-colores">azul</span>. Es un color reservado para la quinceañera.</p>
+            </div>
+        </section>
+
+        <!-- Regalos -->
+        <section class="reveal">
+            <h2 class="section-title">Regalos</h2>
+            <div class="gift-box">
+                <div class="gift-icon" aria-hidden="true"><i class="fas fa-envelope-open-text"></i></div>
+                <p class="gift-label">Lluvia de Sobres</p>
+                <p class="gift-sub">Tu presencia es nuestro mejor regalo. Si deseas tener un detalle con Atenea, contaremos con lluvia de sobres.</p>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section class="reveal" id="rsvp-section">
+            <h2 class="section-title">Confirmar Asistencia</h2>
+            <p style="text-align:center; color:var(--purple-light); margin-bottom:28px; font-size:1rem;">
+                Nos encantaría contarte entre los asistentes.<br>Confirma tu asistencia antes del <strong style="color:var(--gold);">7 de noviembre de 2026</strong>.
+            </p>
+
+            <div id="personalizedWelcome" style="display:none;text-align:center;margin-bottom:20px;padding:16px;background:rgba(255,255,255,0.07);border-radius:12px;">
+                <p id="guestWelcomeText" style="font-size:1.1rem;margin-bottom:6px;"></p>
+                <p id="guestPassesText" style="opacity:.75;font-size:.9rem;"></p>
+                <p id="guestTableText" style="display:none;margin:12px auto 0;padding:9px 16px;max-width:260px;border:1px solid var(--gold);border-radius:999px;color:var(--gold);font-weight:700;font-size:.95rem;"></p>
+            </div>
+
+            <form id="rsvpForm" novalidate style="max-width:480px; margin:0 auto;">
+                <div class="rsvp-field">
+                    <label for="name">Nombre completo</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre" autocomplete="name" required>
+                </div>
+                <div class="rsvp-field">
+                    <label for="guests">¿Cuántos asistentes? (incluyéndote)</label>
+                    <select id="guests" name="guests" required
+                            style="width:100%;padding:12px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:1rem;">
+                        <option value="1">1 persona</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5">5 personas</option>
+                        <option value="6">6 personas</option>
+                        <option value="7">7 personas</option>
+                        <option value="8">8 personas</option>
+                        <option value="9">9 personas</option>
+                        <option value="10">10 personas</option>
+                        <option value="11">11 personas</option>
+                        <option value="12">12 personas</option>
+                        <option value="13">13 personas</option>
+                        <option value="14">14 personas</option>
+                        <option value="15">15 personas</option>
+                        <option value="16">16 personas</option>
+                        <option value="17">17 personas</option>
+                        <option value="18">18 personas</option>
+                        <option value="19">19 personas</option>
+                        <option value="20">20 personas</option>
+                    </select>
+                </div>
+                <div class="rsvp-field" id="nombresGroup" style="display:none;">
+                    <label>Nombres de tus acompañantes</label>
+                    <div id="nombresContainer"></div>
+                </div>
+                <div class="rsvp-field">
+                    <label for="attendance">¿Asistirás?</label>
+                    <select id="attendance" name="attendance" required style="width:100%;padding:12px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:1rem;">
+                        <option value="">Selecciona</option>
+                        <option value="si">Sí, confirmo mi asistencia</option>
+                        <option value="no">No podré asistir</option>
+                    </select>
+                </div>
+                <div class="rsvp-field">
+                    <label for="message">Mensaje para Atenea (opcional)</label>
+                    <textarea id="message" name="message" placeholder="Escribe un mensaje..." rows="3"
+                              style="width:100%;padding:12px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:1rem;resize:vertical;"></textarea>
+                </div>
+                <button type="submit" class="rsvp-submit" id="btnRSVP">
+                    Enviar Confirmación
+                </button>
+            </form>
+            <div id="successMessage" style="display:none;text-align:center;padding:20px;background:rgba(16,185,129,.15);border:1px solid #10b981;border-radius:12px;color:#6ee7b7;margin-top:16px;">
+                <p style="margin-bottom:14px;">✓ ¡Gracias! Tu confirmación ha sido registrada.</p>
+                <p style="margin-bottom:12px;font-size:.9rem;opacity:.8;">¿Deseas avisar por WhatsApp?</p>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+                    <a id="waBtnAtenea" href="#" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;padding:10px 22px;border-radius:25px;text-decoration:none;font-weight:bold;">💬 WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-main">✨ ¡Nos vemos el 21 de noviembre! ✨</p>
+            <div class="divider" style="margin:18px auto;" aria-hidden="true"></div>
+            <p>Producciones Foro 7</p>
+            <p style="font-size:0.92rem; opacity:0.8;">Fotografía · Video · Dron · Invitaciones Web</p>
+            <p style="font-size:0.88rem; margin-top:6px;">477-920-3776</p>
+            <p style="margin-top:16px; font-size:0.8rem; opacity:0.5;">© 2026 — Orianna Atenea García Loera XV Años</p>
+        </footer>
+
+    </div>
+</div><!-- #invitation -->
+
+<script>
+(function () {
+    'use strict';
+
+    /* ── Configuración del evento ─────────────────────────── */
+    const CONFIG = {
+        nombre:      'Orianna Atenea García Loera',
+        telefono:    '524779203776',
+        fechaEvento: new Date(2026, 10, 21, 19, 0, 0),
+    };
+
+    /* ── Stars generator ──────────────────────────────────── */
+    const starsLayer = document.getElementById('starsLayer');
+    for (let i = 0; i < 140; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        const size = Math.random() * 2.5 + 0.5;
+        s.style.cssText = `
+            left:${Math.random()*100}%;
+            top:${Math.random()*100}%;
+            width:${size}px;
+            height:${size}px;
+            --d:${(Math.random()*3+2).toFixed(1)}s;
+            --delay:-${(Math.random()*5).toFixed(1)}s;
+        `;
+        starsLayer.appendChild(s);
+    }
+
+    /* ── Silver particles ─────────────────────────────────── */
+    const pLayer = document.getElementById('particlesLayer');
+    for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.cssText = `
+            left:${20 + Math.random()*60}%;
+            bottom:${10 + Math.random()*30}%;
+            --pd:${(Math.random()*4+5).toFixed(1)}s;
+            --pdelay:-${(Math.random()*8).toFixed(1)}s;
+        `;
+        pLayer.appendChild(p);
+    }
+
+    /* ── Envelope open logic ──────────────────────────────── */
+    const screen   = document.getElementById('envelope-screen');
+    const envelope = document.getElementById('envelope');
+    const invitation = document.getElementById('invitation');
+    const musicBtn   = document.getElementById('music-btn');
+    const musicIcon  = document.getElementById('music-icon');
+    let youtubePlayer;
+    let youtubeReady = false;
+    let musicRequested = false;
+    let opened = false;
+
+    window.onYouTubeIframeAPIReady = function () {
+        youtubePlayer = new YT.Player('youtube-player', {
+            height: '1',
+            width: '1',
+            videoId: 'lY5V4hSLWY8',
+            playerVars: {
+                autoplay: 0,
+                controls: 0,
+                disablekb: 1,
+                loop: 1,
+                playlist: 'lY5V4hSLWY8',
+                playsinline: 1,
+                rel: 0
+            },
+            events: {
+                onReady(event) {
+                    youtubeReady = true;
+                    event.target.setVolume(58);
+                    if (musicRequested) event.target.playVideo();
+                },
+                onStateChange(event) {
+                    const playing = event.data === YT.PlayerState.PLAYING;
+                    musicBtn.classList.toggle('playing', playing);
+                    musicIcon.className = playing ? 'fas fa-pause' : 'fas fa-music';
+                    musicBtn.setAttribute('aria-label', playing ? 'Pausar música' : 'Reanudar música');
+                }
+            }
+        });
+    };
+
+    function playMusic() {
+        musicRequested = true;
+        if (youtubeReady) youtubePlayer.playVideo();
+    }
+
+    function pauseMusic() {
+        musicRequested = false;
+        if (youtubeReady) youtubePlayer.pauseVideo();
+    }
+
+    function openEnvelope() {
+        if (opened) return;
+        opened = true;
+
+        // 1. Animate gala cover
+        screen.classList.add('opening');
+        envelope.classList.add('opening');
+
+        // 2. Start the selected song from the same user gesture
+        playMusic();
+        musicBtn.classList.add('visible');
+
+        // 3. Show invitation
+        setTimeout(() => {
+            document.body.classList.add('invitation-open');
+            invitation.classList.add('visible');
+            startCountdown();
+            initReveal();
+        }, 900);
+
+        // 4. Fade out envelope screen
+        setTimeout(() => {
+            screen.classList.add('hide');
+        }, 1300);
+    }
+
+    screen.addEventListener('click', openEnvelope);
+    screen.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); } });
+
+    /* ── Music button ─────────────────────────────────────── */
+    musicBtn.addEventListener('click', () => {
+        if (!youtubeReady || youtubePlayer.getPlayerState() !== YT.PlayerState.PLAYING) {
+            playMusic();
+        } else {
+            pauseMusic();
+        }
+    });
+
+    /* ── Countdown ────────────────────────────────────────── */
+    function startCountdown() {
+        function update() {
+            const target = CONFIG.fechaEvento.getTime();
+            const now    = Date.now();
+            const diff   = target - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML =
+                    '<p style="grid-column:1/-1;text-align:center;font-size:1.4rem;color:var(--gold);">¡El gran día ha llegado!</p>';
+                return;
+            }
+
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById('days').textContent    = String(d).padStart(2,'0');
+            document.getElementById('hours').textContent   = String(h).padStart(2,'0');
+            document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+            document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+        }
+        update();
+        setInterval(update, 1000);
+    }
+
+    /* ── Scroll reveal ────────────────────────────────────── */
+    function initReveal() {
+        const els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(el => el.classList.add('visible'));
+            return;
+        }
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        els.forEach(el => io.observe(el));
+    }
+
+    /* ── RSVP Form (sin token — visitantes directos) ──────── */
+    const rsvpForm  = document.getElementById('rsvpForm');
+    const guestsInput = document.getElementById('guests');
+
+    function buildNombreInputs(count) {
+        const container = document.getElementById('nombresContainer');
+        const group = document.getElementById('nombresGroup');
+        if (!container || !group) return;
+        container.innerHTML = '';
+        const numAcomp = Math.max(0, count - 1);
+        group.style.display = numAcomp > 0 ? 'block' : 'none';
+        for (let i = 0; i < numAcomp; i++) {
+            const inp = document.createElement('input');
+            inp.type = 'text';
+            inp.className = 'nombre-asistente';
+            inp.placeholder = 'Acompanante ' + (i + 1);
+            inp.style.cssText = 'width:100%;padding:10px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(255,255,255,0.08);color:inherit;font-size:.95rem;';
+            container.appendChild(inp);
+        }
+    }
+
+    if (guestsInput) {
+        guestsInput.addEventListener('input', function(){ buildNombreInputs(parseInt(this.value)||1); });
+        guestsInput.addEventListener('change', function(){ buildNombreInputs(parseInt(this.value)||1); });
+    }
+
+    const ATN_SB_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
+    const ATN_SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
+    const ATN_SB_H    = { 'apikey': ATN_SB_ANON, 'Authorization': 'Bearer ' + ATN_SB_ANON, 'Content-Type': 'application/json' };
+
+    // Solo manejar envio si NO hay token (rsvp-guest.js maneja el caso con token)
+    const hasToken = new URLSearchParams(window.location.search).has('inv');
+    if (rsvpForm && !hasToken) {
+        rsvpForm.addEventListener('submit', async e => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const attendance = document.getElementById('attendance').value;
+            const mensaje = document.getElementById('message').value.trim();
+            const gCount = parseInt(guestsInput?.value) || 1;
+            const nombres = Array.from(document.querySelectorAll('.nombre-asistente')).map(inp => inp.value.trim()).filter(Boolean);
+
+            if (!name || !attendance) return;
+            const asiste = attendance === 'si';
+
+            try {
+                const evR = await fetch(ATN_SB_URL+'/rest/v1/eventos?slug=eq.xv-anos-orianna-atenea&select=id&limit=1',{headers:ATN_SB_H});
+                const [ev] = await evR.json();
+                if (ev?.id) {
+                    const r_inv = await fetch(ATN_SB_URL+'/rest/v1/invitados',{method:'POST',headers:{...ATN_SB_H,'Prefer':'return=representation'},
+                        body:JSON.stringify({evento_id:ev.id,nombre:name,pases_asignados:gCount,pases_confirmados:gCount,asiste:asiste,status:asiste?'confirmada':'declinada',mensaje:mensaje||null,fecha_confirmacion:new Date().toISOString()})});
+                    const [inv] = await r_inv.json();
+                    if (inv?.id && nombres.length) {
+                        await fetch(ATN_SB_URL+'/rest/v1/acompanantes',{method:'POST',headers:{...ATN_SB_H,'Prefer':'return=minimal'},
+                            body:JSON.stringify(nombres.map((n,i)=>({invitado_id:inv.id,nombre:n,orden:i})))});
+                    }
+                }
+            } catch(e){}
+
+            // Mostrar mensaje de exito con opcion de WhatsApp
+            rsvpForm.style.display = 'none';
+            const successEl = document.getElementById('successMessage');
+            if (successEl) {
+                successEl.style.display = 'block';
+                const waBtn = successEl.querySelector('#waBtnAtenea');
+                if (waBtn) {
+                    const statusTxt = asiste ? 'Si asistire ('+gCount+' persona'+(gCount>1?'s':'')+')' : 'No podre asistir';
+                    let msg = 'Hola, te confirmo mi asistencia a los XV de Atenea\n\nNombre: '+name+'\nAsistencia: '+statusTxt;
+                    if (nombres.length) msg += '\nAcompanantes: '+nombres.join(', ');
+                    waBtn.href = 'https://wa.me/'+CONFIG.telefono+'?text='+encodeURIComponent(msg);
+                    waBtn.target = '_blank';
+                }
+            }
+        });
+    }
+
+    /* ── Service Worker ───────────────────────────────────── */
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+
+})();
+</script>
+    <script src="js/visitas.js?v=1"></script>
+
+    <script src="js/rsvp-guest.js?v=1"></script>
+<script src="js/foro7-footer.js?v=1"></script>
+<script>window.EVENTO_SLUG='xv-anos-orianna-atenea';</script>
+<script src="js/evento-loader.js?v=1"></script>
+</body>
+</html>

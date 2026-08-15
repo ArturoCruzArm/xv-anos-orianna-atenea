@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logística - XV Años de Orianna Atenea García Loera</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --purple: #1d5f70;
+            --purple-light: #9fd4e3;
+            --purple-dark: #0f3a47;
+            --lavender: #dceef5;
+            --gold: #7fd0e6;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #dceef5 0%, #c6e4ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(29,95,112,0.3);
+        }
+
+        .header h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            background: white;
+            color: var(--purple);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--purple);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--purple-light);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--purple), var(--purple-light));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 15px;
+            border-left: 4px solid var(--purple);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 25px;
+            width: 16px; height: 16px;
+            background: var(--purple);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--purple-light);
+        }
+
+        .time-badge {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content h3 { color: #333; margin-bottom: 10px; font-size: 1.2rem; }
+        .timeline-content p { color: #666; margin-bottom: 5px; }
+
+        .location-card {
+            background: linear-gradient(135deg, #f0f9fc, #dceef5);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid var(--purple-light);
+        }
+
+        .location-card h4 { color: var(--purple-dark); margin-bottom: 8px; }
+        .location-card a { color: var(--purple); text-decoration: none; font-weight: 600; }
+        .location-card a:hover { text-decoration: underline; }
+
+        .pending-notice {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 2px dashed #ff9800;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            color: #e65100;
+        }
+
+        .pending-notice i { font-size: 2rem; margin-bottom: 10px; display: block; }
+
+        .checklist { list-style: none; padding: 0; }
+
+        .checklist li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .checklist li:hover { background: #dceef5; transform: translateX(5px); }
+        .checklist li i { color: var(--purple); font-size: 1.2rem; flex-shrink: 0; }
+
+        .important-note {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .important-note h3 { color: #2e7d32; margin-bottom: 10px; }
+
+        .important-warning {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .important-warning h3 { color: #e65100; margin-bottom: 10px; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: var(--purple-light);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .info-card i { font-size: 2.5rem; color: var(--purple); margin-bottom: 12px; }
+        .info-card h4 { color: #333; margin-bottom: 8px; }
+        .info-card p { color: #666; font-size: 0.95rem; }
+
+        .payment-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 3px;
+        }
+
+        .status-paid { background: #c8e6c9; color: #2e7d32; }
+        .status-pending { background: #fff3e0; color: #e65100; }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .timeline { padding-left: 20px; }
+            .nav-links { flex-direction: column; align-items: center; }
+        }
+
+        @media print {
+            body { background: white; }
+            .nav-links { display: none; }
+            .section { box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-clipboard-list"></i> Logística del Evento</h1>
+            <p>XV Años de Orianna Atenea García Loera</p>
+            <p>Sábado, 21 de Noviembre de 2026</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-envelope"></i> Invitación</a>
+            <a href="contrato.html"><i class="fas fa-file-contract"></i> Contrato</a>
+            <a href="logistica.html" class="active"><i class="fas fa-clipboard-list"></i> Logística</a>
+            <a href="selector.html"><i class="fas fa-images"></i> Fotos</a>
+        </div>
+
+        <!-- Resumen del Evento -->
+        <div class="section">
+            <h2><i class="fas fa-calendar-check"></i> Resumen del Evento</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>Fecha</h4>
+                    <p><strong>Sábado, 21 de Noviembre de 2026</strong></p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Quinceañera</h4>
+                    <p><strong>Orianna Atenea García Loera</strong></p>
+                    <p style="font-size:0.85rem; color:#999;">Prefiere «Atenea»</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h4>Total del Paquete</h4>
+                    <p><strong>$11,000.00</strong></p>
+                    <span class="payment-status status-pending">Anticipo por definir</span>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-camera"></i>
+                    <h4>Cobertura</h4>
+                    <p>Sesión + Misa + Fiesta</p>
+                    <p><strong>7:00 PM – 2:00 AM</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline del Día -->
+        <div class="section">
+            <h2><i class="fas fa-clock"></i> Timeline del Día del Evento</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="time-badge">7:00 PM</span>
+                    <div class="timeline-content">
+                        <h3><i class="fas fa-church"></i> Misa de Acción de Gracias</h3>
+                        <p><strong>Fecha:</strong> Sábado, 21 de Noviembre de 2026</p>
+                        <p><strong>Hora:</strong> 7:00 PM</p>
+                        <div class="location-card">
+                            <h4><i class="fas fa-map-marker-alt"></i> Parroquia San Pío X</h4>
+                            <p>León, Guanajuato</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">8:30 PM</span>
+                    <div class="timeline-content">
+                        <h3><i class="fas fa-glass-cheers"></i> Recepción y Fiesta</h3>
+                        <p><strong>Hora de inicio:</strong> 8:30 PM</p>
+                        <div class="location-card">
+                            <h4><i class="fas fa-map-marker-alt"></i> Terraza Poliforum</h4>
+                            <p>León, Guanajuato</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">9:00 PM</span>
+                    <div class="timeline-content">
+                        <h3><i class="fas fa-utensils"></i> Servicio de Comida</h3>
+                        <p>Inicio del servicio de alimentos.</p>
+                        <p><strong>DJ del salón:</strong> 9:00 PM – 2:00 AM</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">10:00 PM</span>
+                    <div class="timeline-content">
+                        <h3><i class="fas fa-music"></i> Vals</h3>
+                        <p>Vals con chambelanes contratados.</p>
+                        <p><strong>Coreógrafo:</strong> Dance Center León</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">2:00 AM</span>
+                    <div class="timeline-content">
+                        <h3><i class="fas fa-moon"></i> Cierre del Evento</h3>
+                        <p>Fin de la música y de la cobertura fotográfica y de video.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sesión Fotográfica Previa -->
+        <div class="section">
+            <h2><i class="fas fa-camera-retro"></i> Sesión Fotográfica Previa</h2>
+            <div class="location-card">
+                <h4><i class="fas fa-calendar-check"></i> Sábado, 7 de Noviembre de 2026</h4>
+                <p>Sesión previa incluida en el paquete — dos semanas antes del evento.</p>
+            </div>
+            <div class="important-warning" style="margin-top:15px;">
+                <h3><i class="fas fa-exclamation-triangle"></i> Vestido y accesorios</h3>
+                <p>El vestido, las zapatillas y los accesorios deben estar <strong>completamente listos antes del 7 de noviembre</strong>. Casi todos los vestidos requieren ajustes después de la sesión, y los talleres piden aproximadamente <strong>un mes</strong> para rehacerlos. Conviene adelantar todos los procesos.</p>
+            </div>
+            <div class="important-note" style="margin-top:15px;">
+                <h3><i class="fas fa-lightbulb"></i> Recomendaciones para la Sesión</h3>
+                <ul style="margin-top:10px; padding-left:20px; color:#555;">
+                    <li>Vestido con ajustes finales terminados</li>
+                    <li>Todos los accesorios (tiara, aretes, collar, zapatillas)</li>
+                    <li>Maquillaje y peinado profesional</li>
+                    <li>Ramo de flores (si aplica)</li>
+                    <li>Elementos de la temática de Furina, si se van a usar</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Vestido y Temática -->
+        <div class="section">
+            <h2><i class="fas fa-palette"></i> Vestido y Temática</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-person-dress"></i>
+                    <h4>Vestido</h4>
+                    <p>Azul petróleo con plata y muchos brillos</p>
+                    <p style="font-size:0.85rem; color:#999;">Corset azul · listo para noviembre</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-circle-exclamation"></i>
+                    <h4>Color Reservado</h4>
+                    <p><strong>Azul</strong></p>
+                    <p style="font-size:0.85rem; color:#999;">Reservado para la quinceañera</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    <h4>Temática</h4>
+                    <p><strong>Furina</strong> (Genshin Impact)</p>
+                    <p style="font-size:0.85rem; color:#999;">Elemento Hydro · 5 estrellas</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <h4>Regalos</h4>
+                    <p><strong>Lluvia de sobres</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proveedores Confirmados -->
+        <div class="section">
+            <h2><i class="fas fa-handshake"></i> Proveedores Confirmados</h2>
+            <ul class="checklist">
+                <li><i class="fas fa-check-circle" style="color:#4caf50;"></i><span><strong>Chambelanes</strong> — Contratados</span></li>
+                <li><i class="fas fa-check-circle" style="color:#4caf50;"></i><span><strong>Coreógrafo</strong> — Dance Center León</span></li>
+                <li><i class="fas fa-check-circle" style="color:#4caf50;"></i><span><strong>DJ</strong> — Del salón, de 9:00 PM a 2:00 AM</span></li>
+                <li><i class="fas fa-check-circle" style="color:#4caf50;"></i><span><strong>Salón</strong> — Terraza Poliforum, 8:30 PM</span></li>
+                <li><i class="fas fa-check-circle" style="color:#4caf50;"></i><span><strong>Misa</strong> — Parroquia San Pío X, 7:00 PM</span></li>
+                <li><i class="fas fa-check-circle" style="color:#4caf50;"></i><span><strong>Fotografía y video</strong> — Producciones Foro 7</span></li>
+            </ul>
+        </div>
+
+        <!-- Estado de Pagos -->
+        <div class="section">
+            <h2><i class="fas fa-tasks"></i> Estado de Pagos</h2>
+            <ul class="checklist">
+                <li>
+                    <i class="fas fa-check-circle" style="color:#4caf50;"></i>
+                    <span><strong>Agenda apartada</strong> — Fecha reservada el 13 de agosto de 2026</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Anticipo:</strong> Por registrar</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Saldo:</strong> $11,000 — Abonos libres, liquidar 8 días antes del evento</span>
+                </li>
+            </ul>
+            <div class="important-warning">
+                <h3><i class="fas fa-exclamation-triangle"></i> Recuerda</h3>
+                <p>Los abonos son libres, pero el saldo debe liquidarse <strong>8 días antes del evento</strong> (a más tardar el <strong>13 de noviembre de 2026</strong>) para confirmar todos los servicios. El anticipo es <strong>no reembolsable</strong> en caso de cancelación.</p>
+            </div>
+        </div>
+
+        <!-- Información Pendiente -->
+        <div class="section">
+            <h2><i class="fas fa-clipboard-check"></i> Información Pendiente</h2>
+            <p style="margin-bottom:15px; color:#666;">Los siguientes datos son necesarios para completar la logística del evento:</p>
+            <ul class="checklist">
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Contrato</strong> — Generado, pendiente de enviar y firmar</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Nombres de los papás</strong> — Para la invitación y el contrato</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Padrinos de honor</strong> — Nombres por confirmar</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Dirección exacta y mapa</strong> — Parroquia San Pío X y Terraza Poliforum</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Teléfono de contacto</strong> — WhatsApp de la mamá (Patrixia)</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Protocolo del salón</strong> — Brindis, pastel, baile sorpresa</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Fotos de Atenea desde niña</strong> — Para el videoclip de recuerdo</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle" style="color:#4caf50;"></i>
+                    <span><s>Fecha del evento</s> — <strong>Sábado, 21 de Noviembre de 2026</strong></span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle" style="color:#4caf50;"></i>
+                    <span><s>Sesión fotográfica previa</s> — <strong>7 de noviembre de 2026</strong></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Paquete Contratado -->
+        <div class="section">
+            <h2><i class="fas fa-box-open"></i> Paquete Contratado</h2>
+            <p style="color:#666; margin-bottom:15px;"><strong>Paquete Premium — $10,000</strong> + adicionales</p>
+            <ul class="checklist">
+                <li><i class="fas fa-camera"></i><span>Cobertura de sesión, misa y fiesta</span></li>
+                <li><i class="fas fa-images"></i><span>Fotografías del evento impresas</span></li>
+                <li><i class="fas fa-film"></i><span>Película USB editada, musicalizada y titulada</span></li>
+                <li><i class="fas fa-video"></i><span>Videoclip cinematográfico (3–6 min, estilo emotivo para redes)</span></li>
+                <li><i class="fas fa-tv"></i><span>Video para proyectar en el salón (sesión previa y fotos del recuerdo)</span></li>
+                <li><i class="fas fa-portrait"></i><span>Foto ampliada con marco</span></li>
+                <li><i class="fas fa-box"></i><span>Cajas impresas para USB y fotografías</span></li>
+                <li><i class="fas fa-helicopter"></i><span>Tomas de dron</span></li>
+            </ul>
+            <div class="important-note" style="margin-top:15px;">
+                <h3><i class="fas fa-plus-circle"></i> Adicionales Contratados — $1,000</h3>
+                <ul style="margin-top:10px; padding-left:20px; color:#555;">
+                    <li><strong>Invitación digital interactiva</strong> — Este sitio web, con RSVP y mapa</li>
+                    <li><strong>Reel para redes sociales</strong> — Video vertical con edición profesional</li>
+                    <li><strong>Canciones personalizadas</strong> — <em>Cortesía, sin costo</em></li>
+                </ul>
+                <p style="margin-top:12px;"><strong>Total del paquete: $11,000</strong></p>
+            </div>
+        </div>
+
+        <!-- Contacto -->
+        <div class="section">
+            <h2><i class="fas fa-phone-alt"></i> Contacto</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>Patrixia</h4>
+                    <p style="font-size:0.85rem; color:#999;">Mamá de la quinceañera</p>
+                    <p style="color:#999; font-style:italic;">Teléfono por confirmar</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-camera"></i>
+                    <h4>Producciones Foro 7</h4>
+                    <p>Fotografía · Video · Dron · Invitaciones Web</p>
+                    <p style="font-size:0.85rem; color:#999;">Padilla 112, Cumbres de Arbide, León</p>
+                    <p><a href="https://wa.me/524779203776" target="_blank" style="color:var(--purple); text-decoration:none;">477-920-3776</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/visitas.js?v=2"></script>
+<script src="js/foro7-footer.js?v=1"></script>
+</body>
+</html>
