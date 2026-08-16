@@ -10,18 +10,18 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Lato', sans-serif; background: #f5f5f5; padding: 20px; line-height: 1.6; }
         .container { max-width: 900px; margin: 0 auto; background: white; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .header { text-align: center; border-bottom: 3px solid #1d5f70; padding-bottom: 20px; margin-bottom: 30px; }
-        .company-name { font-size: 2rem; color: #1d5f70; font-weight: 700; margin-bottom: 5px; }
+        .header { text-align: center; border-bottom: 3px solid #24306e; padding-bottom: 20px; margin-bottom: 30px; }
+        .company-name { font-size: 2rem; color: #24306e; font-weight: 700; margin-bottom: 5px; }
         .company-subtitle { font-size: 1rem; color: #666; }
         .contract-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #333; margin: 30px 0 20px; text-align: center; }
         .section { margin-bottom: 30px; }
-        .section-title { font-size: 1.3rem; color: #1d5f70; margin-bottom: 15px; font-weight: 700; border-left: 4px solid #9fd4e3; padding-left: 15px; }
+        .section-title { font-size: 1.3rem; color: #24306e; margin-bottom: 15px; font-weight: 700; border-left: 4px solid #a9c4e8; padding-left: 15px; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         .info-item { padding: 10px; background: #f9f9f9; border-radius: 5px; }
         .info-label { font-weight: 700; color: #666; font-size: 0.9rem; margin-bottom: 5px; }
         .info-value { color: #333; font-size: 1.1rem; }
-        .package-details { background: #f0f9fc; padding: 20px; border-radius: 8px; border: 2px solid #9fd4e3; }
-        .package-title { font-size: 1.5rem; color: #1d5f70; margin-bottom: 15px; text-align: center; font-weight: 700; }
+        .package-details { background: #f2f5fc; padding: 20px; border-radius: 8px; border: 2px solid #a9c4e8; }
+        .package-title { font-size: 1.5rem; color: #24306e; margin-bottom: 15px; text-align: center; font-weight: 700; }
         .package-list { list-style: none; padding: 0; }
         .package-list li { padding: 8px 0; padding-left: 30px; position: relative; color: #333; }
         .package-list li:before { content: "✅"; position: absolute; left: 0; }
@@ -35,7 +35,7 @@
         .package-pending li { margin-bottom: 6px; }
         .pricing-table { width: 100%; margin-top: 20px; border-collapse: collapse; }
         .pricing-table th, .pricing-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        .pricing-table th { background: #1d5f70; color: white; font-weight: 700; }
+        .pricing-table th { background: #24306e; color: white; font-weight: 700; }
         .total-row { background: #f9f9f9; font-weight: 700; font-size: 1.2rem; }
         .paid-row { background: #e8f5e9; }
         .pending-row { background: #fff3e0; }
@@ -50,8 +50,8 @@
         .table-right { text-align: right; }
         .contract-date { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 0.9rem; }
         .nav-links { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
-        .nav-links a { display: inline-block; background: #1d5f70; color: white; padding: 10px 25px; border-radius: 25px; text-decoration: none; transition: all 0.3s; }
-        .nav-links a:hover { background: #0f3a47; transform: translateY(-2px); }
+        .nav-links a { display: inline-block; background: #24306e; color: white; padding: 10px 25px; border-radius: 25px; text-decoration: none; transition: all 0.3s; }
+        .nav-links a:hover { background: #141c46; transform: translateY(-2px); }
         .pending-value { color: #b26a00; font-style: italic; }
         @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } .signatures { grid-template-columns: 1fr; } }
     </style>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="info-item">
                     <div class="info-label">Teléfono / WhatsApp</div>
-                    <div class="info-value pending-value">Por confirmar</div>
+                    <div class="info-value"><a href="https://wa.me/5214771215356" target="_blank" style="color:#24306e; text-decoration:none;">477-121-5356</a></div>
                 </div>
                 <div class="info-item">
                     <div class="info-label">Fecha del Evento</div>
@@ -115,32 +115,25 @@
         <div class="section">
             <div class="section-title">Paquete Contratado</div>
             <div class="package-details">
-                <div class="package-title">PAQUETE PREMIUM — $10,000</div>
+                <div class="package-title">🟣 PAQUETE PREMIUM — $9,990</div>
+                <p style="text-align:center; color:#555; margin-bottom:15px;">La experiencia más completa para conservar todos los recuerdos del evento.</p>
                 <ul class="package-list">
-                    <li>Cobertura por Sesión, Misa y Fiesta</li>
-                    <li>Sesión fotográfica antes del evento (7 de noviembre de 2026)</li>
-                    <li>Fotografías del evento impresas</li>
-                    <li>Película USB editada, musicalizada y titulada</li>
+                    <li><strong>Cobertura completa de fotografía</strong> — desde la casa, sesión, misa y fiesta</li>
+                    <li><strong>Cobertura completa de video</strong> — desde la casa, sesión, misa y fiesta</li>
+                    <li><strong>Sesión fotográfica previa en 2 locaciones</strong> (7 de noviembre de 2026)</li>
+                    <li>Tomas aéreas con dron</li>
+                    <li>Más de 1,200 fotografías digitales editadas</li>
+                    <li><strong>Fotolibro de lujo</strong> <em>o bien</em> <strong>200 fotografías impresas en 5x7 pulgadas</strong> <span class="pending-value">(la clienta debe elegir una de las dos opciones)</span></li>
                     <li>Videoclip cinematográfico de 3 a 6 minutos, con edición emotiva para redes sociales</li>
                     <li>Video para proyectar en el salón (sesión previa y fotos del recuerdo)</li>
-                    <li>Foto ampliada con marco</li>
-                    <li>Cajas impresas para la USB y para las fotografías</li>
-                    <li>Tomas de dron</li>
+                    <li>Ampliación de 60x80 cm</li>
+                    <li>USB personalizada</li>
+                    <li>Caja de madera premium</li>
+                    <li>Galería privada para descargar todas las fotografías</li>
                 </ul>
 
-                <div class="package-pending">
-                    <div class="package-pending-title">⚠ Pendiente de detallar antes de la firma</div>
-                    <ul>
-                        <li>Cantidad exacta y tamaño de las fotografías impresas</li>
-                        <li>Medidas de la foto ampliada con marco</li>
-                        <li>Número de locaciones de la sesión previa</li>
-                        <li>Duración de la película y horas de cobertura incluidas</li>
-                    </ul>
-                    <p style="margin-top:10px; color:#7a4a12;">Este paquete es un precio acordado directamente con la clienta y no corresponde a un nivel del catálogo público. Los puntos anteriores deben completarse con el listado oficial antes de firmar.</p>
-                </div>
-
                 <div class="package-extras">
-                    <div class="package-extras-title">Servicios Adicionales Contratados — $1,000</div>
+                    <div class="package-extras-title">Servicios Adicionales Contratados — $1,010</div>
                     <ul class="package-list">
                         <li>Invitación digital interactiva (este sitio web, con RSVP, mapa y cuenta regresiva)</li>
                         <li>Reel para redes sociales — video vertical con edición profesional</li>
@@ -168,11 +161,11 @@
                 <tbody>
                     <tr>
                         <td>Paquete Premium — Fotografía y Video</td>
-                        <td class="table-right">$10,000.00</td>
+                        <td class="table-right">$9,990.00</td>
                     </tr>
                     <tr>
                         <td>Invitación digital interactiva + Reel para redes</td>
-                        <td class="table-right">$1,000.00</td>
+                        <td class="table-right">$1,010.00</td>
                     </tr>
                     <tr class="free-row">
                         <td>Canciones personalizadas <em>(cortesía)</em></td>
@@ -196,6 +189,10 @@
                 La fecha del evento quedó apartada en agenda el 13 de agosto de 2026. Los abonos son libres en monto y frecuencia,
                 siempre que el saldo se liquide a más tardar el <strong>13 de noviembre de 2026</strong> (8 días antes del evento).
             </p>
+            <p style="margin-top:8px; color:#b26a00; font-size:0.85rem; font-style:italic;">
+                Nota: el precio de lista del paquete es de $9,990 y los adicionales son de $1,000, lo que suma $10,990.
+                El total quedó en $11,000 cerrados según lo acordado por WhatsApp, por lo que los adicionales se registran en $1,010.
+            </p>
         </div>
 
         <div class="terms">
@@ -211,8 +208,10 @@
                 <li>Las imágenes del evento serán entregadas al cliente a través del <strong>selector de fotos en línea</strong> para su revisión y selección.</li>
                 <li>La producción final (impresiones, USB, ampliación, etc.) se entregará <strong>una vez que el cliente haya realizado la selección completa</strong> de su paquete en el selector.</li>
                 <li>El tiempo de entrega es de 30 a 45 días hábiles <strong>a partir de la selección final</strong> del cliente.</li>
-                <li>La invitación digital y el reel para redes sociales están incluidos en el total a pagar ($1,000 ambos).</li>
+                <li>La invitación digital y el reel para redes sociales están incluidos en el total a pagar.</li>
                 <li>Las canciones personalizadas se otorgan sin costo como cortesía y no son canjeables por descuento en efectivo.</li>
+                <li>El paquete incluye <strong>fotolibro de lujo o 200 fotografías impresas de 5x7 pulgadas</strong>; el cliente deberá elegir una de las dos opciones antes de la entrega de la producción final.</li>
+                <li>La cobertura del día del evento inicia en el domicilio de la quinceañera y continúa durante la misa y la fiesta.</li>
             </ul>
         </div>
 

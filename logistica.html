@@ -12,16 +12,16 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --purple: #1d5f70;
-            --purple-light: #9fd4e3;
-            --purple-dark: #0f3a47;
-            --lavender: #dceef5;
-            --gold: #7fd0e6;
+            --purple: #24306e;
+            --purple-light: #a9c4e8;
+            --purple-dark: #141c46;
+            --lavender: #dee6f6;
+            --gold: #7fd8f2;
         }
 
         body {
             font-family: 'Lato', sans-serif;
-            background: linear-gradient(135deg, #dceef5 0%, #c6e4ee 100%);
+            background: linear-gradient(135deg, #dee6f6 0%, #ccd8ee 100%);
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
@@ -36,7 +36,7 @@
             border-radius: 20px;
             color: white;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(29,95,112,0.3);
+            box-shadow: 0 10px 30px rgba(36,48,110,0.3);
         }
 
         .header h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 10px; }
@@ -136,7 +136,7 @@
         .timeline-content p { color: #666; margin-bottom: 5px; }
 
         .location-card {
-            background: linear-gradient(135deg, #f0f9fc, #dceef5);
+            background: linear-gradient(135deg, #f2f5fc, #dee6f6);
             padding: 15px;
             border-radius: 10px;
             margin-top: 15px;
@@ -171,7 +171,7 @@
             transition: all 0.3s;
         }
 
-        .checklist li:hover { background: #dceef5; transform: translateX(5px); }
+        .checklist li:hover { background: #dee6f6; transform: translateX(5px); }
         .checklist li i { color: var(--purple); font-size: 1.2rem; flex-shrink: 0; }
 
         .important-note {
@@ -284,8 +284,8 @@
                 <div class="info-card">
                     <i class="fas fa-camera"></i>
                     <h4>Cobertura</h4>
-                    <p>Sesión + Misa + Fiesta</p>
-                    <p><strong>7:00 PM – 2:00 AM</strong></p>
+                    <p>Casa + Sesión + Misa + Fiesta</p>
+                    <p><strong>Hasta las 2:00 AM</strong></p>
                 </div>
             </div>
         </div>
@@ -294,6 +294,15 @@
         <div class="section">
             <h2><i class="fas fa-clock"></i> Timeline del Día del Evento</h2>
             <div class="timeline">
+                <div class="timeline-item">
+                    <span class="time-badge">Por definir</span>
+                    <div class="timeline-content">
+                        <h3><i class="fas fa-house"></i> Arreglo en Casa</h3>
+                        <p>La cobertura de foto y video inicia en el domicilio de la quinceañera: maquillaje, peinado, vestido y salida.</p>
+                        <p style="color:#e65100;"><strong>Falta:</strong> domicilio y hora de llegada del equipo.</p>
+                    </div>
+                </div>
+
                 <div class="timeline-item">
                     <span class="time-badge">7:00 PM</span>
                     <div class="timeline-content">
@@ -352,7 +361,7 @@
             <h2><i class="fas fa-camera-retro"></i> Sesión Fotográfica Previa</h2>
             <div class="location-card">
                 <h4><i class="fas fa-calendar-check"></i> Sábado, 7 de Noviembre de 2026</h4>
-                <p>Sesión previa incluida en el paquete — dos semanas antes del evento.</p>
+                <p>Sesión previa incluida en el paquete, en <strong>2 locaciones</strong> — dos semanas antes del evento.</p>
             </div>
             <div class="important-warning" style="margin-top:15px;">
                 <h3><i class="fas fa-exclamation-triangle"></i> Vestido y accesorios</h3>
@@ -459,7 +468,19 @@
                 </li>
                 <li>
                     <i class="fas fa-clock" style="color:#ff9800;"></i>
-                    <span><strong>Teléfono de contacto</strong> — WhatsApp de la mamá (Patrixia)</span>
+                    <span><strong>Fotolibro de lujo o 200 fotos impresas 5x7"</strong> — Atenea debe elegir una de las dos</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Domicilio y hora de inicio en casa</strong> — La cobertura arranca ahí</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" style="color:#ff9800;"></i>
+                    <span><strong>Locaciones de la sesión previa</strong> — El paquete incluye 2, falta elegirlas</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle" style="color:#4caf50;"></i>
+                    <span><s>Teléfono de contacto</s> — <strong>Patrixia: 477-121-5356</strong></span>
                 </li>
                 <li>
                     <i class="fas fa-clock" style="color:#ff9800;"></i>
@@ -483,19 +504,23 @@
         <!-- Paquete Contratado -->
         <div class="section">
             <h2><i class="fas fa-box-open"></i> Paquete Contratado</h2>
-            <p style="color:#666; margin-bottom:15px;"><strong>Paquete Premium — $10,000</strong> + adicionales</p>
+            <p style="color:#666; margin-bottom:15px;"><strong>Paquete Premium — $9,990</strong> + adicionales</p>
             <ul class="checklist">
-                <li><i class="fas fa-camera"></i><span>Cobertura de sesión, misa y fiesta</span></li>
-                <li><i class="fas fa-images"></i><span>Fotografías del evento impresas</span></li>
-                <li><i class="fas fa-film"></i><span>Película USB editada, musicalizada y titulada</span></li>
-                <li><i class="fas fa-video"></i><span>Videoclip cinematográfico (3–6 min, estilo emotivo para redes)</span></li>
+                <li><i class="fas fa-camera"></i><span>Cobertura completa de fotografía — desde la casa, sesión, misa y fiesta</span></li>
+                <li><i class="fas fa-video"></i><span>Cobertura completa de video — desde la casa, sesión, misa y fiesta</span></li>
+                <li><i class="fas fa-camera-retro"></i><span>Sesión fotográfica previa en <strong>2 locaciones</strong></span></li>
+                <li><i class="fas fa-helicopter"></i><span>Tomas aéreas con dron</span></li>
+                <li><i class="fas fa-images"></i><span>Más de 1,200 fotografías digitales editadas</span></li>
+                <li><i class="fas fa-book"></i><span>Fotolibro de lujo <em>o</em> 200 fotografías impresas de 5x7" — <strong>falta que elija</strong></span></li>
+                <li><i class="fas fa-film"></i><span>Videoclip cinematográfico (3–6 min, estilo emotivo para redes)</span></li>
                 <li><i class="fas fa-tv"></i><span>Video para proyectar en el salón (sesión previa y fotos del recuerdo)</span></li>
-                <li><i class="fas fa-portrait"></i><span>Foto ampliada con marco</span></li>
-                <li><i class="fas fa-box"></i><span>Cajas impresas para USB y fotografías</span></li>
-                <li><i class="fas fa-helicopter"></i><span>Tomas de dron</span></li>
+                <li><i class="fas fa-portrait"></i><span>Ampliación de 60x80 cm</span></li>
+                <li><i class="fas fa-usb"></i><span>USB personalizada</span></li>
+                <li><i class="fas fa-box"></i><span>Caja de madera premium</span></li>
+                <li><i class="fas fa-cloud-arrow-down"></i><span>Galería privada para descargar todas las fotografías</span></li>
             </ul>
             <div class="important-note" style="margin-top:15px;">
-                <h3><i class="fas fa-plus-circle"></i> Adicionales Contratados — $1,000</h3>
+                <h3><i class="fas fa-plus-circle"></i> Adicionales Contratados — $1,010</h3>
                 <ul style="margin-top:10px; padding-left:20px; color:#555;">
                     <li><strong>Invitación digital interactiva</strong> — Este sitio web, con RSVP y mapa</li>
                     <li><strong>Reel para redes sociales</strong> — Video vertical con edición profesional</li>
@@ -513,7 +538,7 @@
                     <i class="fab fa-whatsapp"></i>
                     <h4>Patrixia</h4>
                     <p style="font-size:0.85rem; color:#999;">Mamá de la quinceañera</p>
-                    <p style="color:#999; font-style:italic;">Teléfono por confirmar</p>
+                    <p><a href="https://wa.me/5214771215356" target="_blank" style="color:var(--purple); text-decoration:none;">477-121-5356</a></p>
                 </div>
                 <div class="info-card">
                     <i class="fas fa-camera"></i>

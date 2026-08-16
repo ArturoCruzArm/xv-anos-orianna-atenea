@@ -185,7 +185,7 @@
       if(!notifs.length) return;
       const badge=document.createElement('div');
       badge.id='notif-badge';
-      badge.style.cssText='position:fixed;top:80px;right:1rem;z-index:9999;background:#1d5f70;color:#fff;border-radius:12px;padding:.8rem 1.2rem;max-width:320px;box-shadow:0 4px 20px rgba(0,0,0,.4);font-size:.85rem;cursor:pointer;';
+      badge.style.cssText='position:fixed;top:80px;right:1rem;z-index:9999;background:#24306e;color:#fff;border-radius:12px;padding:.8rem 1.2rem;max-width:320px;box-shadow:0 4px 20px rgba(0,0,0,.4);font-size:.85rem;cursor:pointer;';
       badge.innerHTML='<strong>Notificaciones</strong>';
       badge.onclick=async()=>{
         await fetch(SB+'/rest/v1/notificaciones?evento_id=eq.'+ev.id+'&leida=eq.false',{method:'PATCH',headers:H,body:JSON.stringify({leida:true})});

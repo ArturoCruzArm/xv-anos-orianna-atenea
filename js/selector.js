@@ -48,7 +48,7 @@ const CONFIG = {
     nombre:             (window.EVENT_CONFIG && window.EVENT_CONFIG.nombre)             || 'Orianna Atenea García Loera',
     telefono:           (window.EVENT_CONFIG && window.EVENT_CONFIG.telefono)           || '',
     fechaEvento:        (window.EVENT_CONFIG && window.EVENT_CONFIG.fechaEvento)        || new Date(2026, 10, 21, 19, 0, 0),
-    limiteImpresion:    100,
+    limiteImpresion:    200,
     limiteInvitacion:   null,
     costoFotoAdicional: (window.EVENT_CONFIG && window.EVENT_CONFIG.costoFotoAdicional) || 15,
 };

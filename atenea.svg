@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" width="720" height="900" role="img" aria-label="XV Años Orianna Atenea García Loera">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
-      <stop offset="0%" stop-color="#0b3040"/>
-      <stop offset="45%" stop-color="#134c60"/>
-      <stop offset="100%" stop-color="#061a22"/>
+      <stop offset="0%" stop-color="#1b2a63"/>
+      <stop offset="45%" stop-color="#26317a"/>
+      <stop offset="100%" stop-color="#070b1f"/>
     </linearGradient>
     <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f4fbfe"/>
-      <stop offset="38%" stop-color="#b9d4e0"/>
-      <stop offset="62%" stop-color="#eaf6fb"/>
-      <stop offset="100%" stop-color="#8fb6c6"/>
+      <stop offset="0%" stop-color="#f6f9ff"/>
+      <stop offset="38%" stop-color="#bcc8e4"/>
+      <stop offset="62%" stop-color="#eaf0fb"/>
+      <stop offset="100%" stop-color="#8f9dc4"/>
     </linearGradient>
     <radialGradient id="glow" cx="50%" cy="38%" r="58%">
-      <stop offset="0%" stop-color="#6fd3e8" stop-opacity="0.34"/>
-      <stop offset="100%" stop-color="#6fd3e8" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#6fbcf0" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#6fbcf0" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#5fc6de" stop-opacity="0.0"/>
-      <stop offset="50%" stop-color="#7fe0f2" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#5fc6de" stop-opacity="0.0"/>
+      <stop offset="0%" stop-color="#5fa8e0" stop-opacity="0.0"/>
+      <stop offset="50%" stop-color="#8fd8f5" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#5fa8e0" stop-opacity="0.0"/>
     </linearGradient>
   </defs>
 
@@ -34,7 +34,7 @@
   </g>
 
   <!-- burbujas -->
-  <g fill="#9fe6f5">
+  <g fill="#a8dcf7">
     <circle cx="118" cy="726" r="4" opacity="0.55"/>
     <circle cx="212" cy="784" r="2.6" opacity="0.4"/>
     <circle cx="556" cy="700" r="3.4" opacity="0.5"/>
@@ -42,14 +42,27 @@
     <circle cx="392" cy="820" r="3" opacity="0.3"/>
   </g>
 
-  <!-- estrellas -->
-  <g fill="#eaf6fb">
+  <!-- destellos del vestido -->
+  <g fill="#eaf0fb">
     <circle cx="92"  cy="120" r="2.2" opacity="0.8"/>
     <circle cx="640" cy="96"  r="1.8" opacity="0.7"/>
     <circle cx="558" cy="188" r="2.6" opacity="0.55"/>
     <circle cx="150" cy="236" r="1.6" opacity="0.6"/>
     <circle cx="672" cy="300" r="2"   opacity="0.45"/>
     <circle cx="60"  cy="384" r="1.7" opacity="0.5"/>
+    <circle cx="248" cy="150" r="1.4" opacity="0.45"/>
+    <circle cx="470" cy="252" r="1.5" opacity="0.4"/>
+  </g>
+
+  <!-- encaje plateado inferior, como el del vestido -->
+  <g fill="none" stroke="url(#silver)" stroke-width="1.1" opacity="0.42">
+    <path d="M104 858 q 26 -46 52 0 q 26 -46 52 0"/>
+    <path d="M260 858 q 26 -46 52 0 q 26 -46 52 0"/>
+    <path d="M416 858 q 26 -46 52 0 q 26 -46 52 0"/>
+    <path d="M572 858 q 26 -46 52 0"/>
+    <path d="M130 858 q 13 -26 26 -40 q 13 14 26 40"/>
+    <path d="M286 858 q 13 -26 26 -40 q 13 14 26 40"/>
+    <path d="M442 858 q 13 -26 26 -40 q 13 14 26 40"/>
   </g>
 
   <!-- marco -->
@@ -65,7 +78,7 @@
   </g>
 
   <text x="360" y="196" text-anchor="middle" font-family="Lato, Helvetica, Arial, sans-serif"
-        font-size="24" letter-spacing="11" fill="#a9cbd8">MIS XV AÑOS</text>
+        font-size="24" letter-spacing="11" fill="#c3cde6">MIS XV AÑOS</text>
 
   <!-- monograma -->
   <circle cx="360" cy="360" r="118" fill="none" stroke="url(#silver)" stroke-width="1.4" opacity="0.6"/>
@@ -74,17 +87,17 @@
         font-size="176" font-weight="700" fill="url(#silver)">A</text>
 
   <text x="360" y="546" text-anchor="middle" font-family="Playfair Display, Georgia, serif"
-        font-size="58" fill="#f2fafd">Orianna Atenea</text>
+        font-size="58" fill="#f3f6fc">Orianna Atenea</text>
   <text x="360" y="592" text-anchor="middle" font-family="Lato, Helvetica, Arial, sans-serif"
-        font-size="25" letter-spacing="8" fill="#a9cbd8">GARCÍA LOERA</text>
+        font-size="25" letter-spacing="8" fill="#c3cde6">GARCÍA LOERA</text>
 
   <g opacity="0.85">
     <line x1="228" y1="620" x2="336" y2="620" stroke="url(#silver)" stroke-width="1.2"/>
     <line x1="384" y1="620" x2="492" y2="620" stroke="url(#silver)" stroke-width="1.2"/>
     <text x="360" y="627" text-anchor="middle" font-family="Lato, Helvetica, Arial, sans-serif"
-          font-size="18" fill="#cfe7f0">✦</text>
+          font-size="18" fill="#cfdcf0">✦</text>
   </g>
 
   <text x="360" y="700" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif"
-        font-size="40" letter-spacing="5" fill="#eaf6fb">21 · 11 · 2026</text>
+        font-size="40" letter-spacing="5" fill="#eaf0fb">21 · 11 · 2026</text>
 </svg>
