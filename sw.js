@@ -1,5 +1,5 @@
-const CACHE_SHELL = 'atenea-shell-v1';
-const CACHE_IMAGES = 'atenea-images-v1';
+const CACHE_SHELL = 'atenea-shell-v20261010';
+const CACHE_IMAGES = 'atenea-images-v20261010';
 
 self.addEventListener('install', event => {
     event.waitUntil(
