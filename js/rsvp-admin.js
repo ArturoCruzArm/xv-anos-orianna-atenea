@@ -13,7 +13,7 @@
 
     async function getEventoId() {
         if (eventoId) return eventoId;
-        const r = await fetch(`${SB_URL}/rest/v1/eventos?slug=eq.${EVENTO_SLUG}&select=id&limit=1`, { headers: SB_H });
+        const r = await RsvpApi.request(`${SB_URL}/rest/v1/eventos?slug=eq.${EVENTO_SLUG}&select=id&limit=1`, { headers: SB_H });
         const rows = await r.json();
         eventoId = rows[0]?.id || null;
         return eventoId;
@@ -22,10 +22,10 @@
     // ── Cargar invitados + acompanantes ──────────────────────────────────────
     async function loadGuests() {
         const eid = await getEventoId();
-        if (!eid) { showError('No se encontro el evento.'); return; }
+        if (!eid) throw new Error('No se encontró el evento.');
         const [gR, aR] = await Promise.all([
-            fetch(`${SB_URL}/rest/v1/invitados?evento_id=eq.${eid}&order=fecha_creacion.asc`, { headers: SB_H }),
-            fetch(`${SB_URL}/rest/v1/acompanantes?select=*,invitado_id&order=orden.asc`, { headers: SB_H })
+            RsvpApi.request(`${SB_URL}/rest/v1/invitados?evento_id=eq.${eid}&order=fecha_creacion.asc`, { headers: SB_H }),
+            RsvpApi.request(`${SB_URL}/rest/v1/acompanantes?select=*,invitado_id&order=orden.asc`, { headers: SB_H })
         ]);
         guests = await gR.json();
         const acomps = await aR.json();
@@ -37,61 +37,50 @@
     }
 
     // ── Guardar invitado + acompanantes ──────────────────────────────────────
-    async function assertSupabaseOk(response, action) {
-        if (response.ok) return response;
-        let detail = '';
-        try {
-            const payload = await response.json();
-            detail = payload.message || payload.details || payload.hint || payload.error || '';
-        } catch (_) {
-            detail = await response.text().catch(() => '');
-        }
-        throw new Error(`${action} (${response.status})${detail ? `: ${detail}` : ''}`);
-    }
-
     async function saveGuest(data, nombresAcomp) {
         const eid = await getEventoId();
         if (!eid) throw new Error('No se encontró el evento en Supabase.');
 
         let guestId;
         if (editingId) {
-            const updateResponse = await fetch(`${SB_URL}/rest/v1/invitados?id=eq.${editingId}`, {
+            await RsvpApi.request(`${SB_URL}/rest/v1/invitados?id=eq.${editingId}`, {
                 method: 'PATCH', headers: { ...SB_H, 'Prefer': 'return=minimal' },
                 body: JSON.stringify(data)
             });
-            await assertSupabaseOk(updateResponse, 'No se pudo actualizar el invitado');
+
             guestId = editingId;
             // Borrar acompanantes viejos y recrear
-            const deleteResponse = await fetch(`${SB_URL}/rest/v1/acompanantes?invitado_id=eq.${guestId}`, {
+            await RsvpApi.request(`${SB_URL}/rest/v1/acompanantes?invitado_id=eq.${guestId}`, {
                 method: 'DELETE', headers: SB_H
             });
-            await assertSupabaseOk(deleteResponse, 'No se pudieron actualizar los acompañantes');
+
         } else {
-            const r = await fetch(`${SB_URL}/rest/v1/invitados`, {
+            const r = await RsvpApi.request(`${SB_URL}/rest/v1/invitados`, {
                 method: 'POST', headers: { ...SB_H, 'Prefer': 'return=representation' },
                 body: JSON.stringify({ evento_id: eid, ...data })
             });
-            await assertSupabaseOk(r, 'No se pudo guardar el invitado');
+
             const created = await r.json();
             guestId = created[0]?.id;
             if (!guestId) throw new Error('Supabase no devolvió el identificador del invitado.');
+            editingId = guestId; // A retry updates this row if companion saving fails.
         }
         // Insertar acompanantes
         const nombresValidos = nombresAcomp.map(n => n.trim()).filter(Boolean);
         if (nombresValidos.length) {
             const rows = nombresValidos.map((n, i) => ({ invitado_id: guestId, nombre: n, orden: i }));
-            const companionResponse = await fetch(`${SB_URL}/rest/v1/acompanantes`, {
+            await RsvpApi.request(`${SB_URL}/rest/v1/acompanantes`, {
                 method: 'POST', headers: { ...SB_H, 'Prefer': 'return=minimal' },
                 body: JSON.stringify(rows)
             });
-            await assertSupabaseOk(companionResponse, 'No se pudieron guardar los acompañantes');
+
         }
         await loadGuests();
     }
 
     async function deleteGuest(id) {
         if (!confirm('Eliminar este invitado?')) return;
-        await fetch(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, { method: 'DELETE', headers: SB_H });
+        await RsvpApi.request(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, { method: 'DELETE', headers: SB_H });
         guests = guests.filter(g => g.id !== id);
         renderAll();
     }
@@ -112,12 +101,12 @@
             : '';
         const msg = `Hola ${g.nombre}\n\nTe invitamos a *${evName}*${evDate}.\n\n${link}\n\nTienes *${pasesText}*.${extra}${mesaText}\n\nConfirma desde el enlace.`;
 
-        await fetch(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, {
+        await RsvpApi.request(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, {
             method: 'PATCH', headers: { ...SB_H, 'Prefer': 'return=minimal' },
-            body: JSON.stringify({ status: 'enviada', fecha_envio: new Date().toISOString() })
+            body: JSON.stringify({ ...(['confirmada', 'declinada'].includes(g.status) ? {} : { status: 'enviada' }), fecha_envio: new Date().toISOString() })
         });
         const idx = guests.findIndex(x => x.id === id);
-        if (idx >= 0) { guests[idx].status = 'enviada'; guests[idx].fecha_envio = new Date().toISOString(); }
+        if (idx >= 0) { if (!['confirmada', 'declinada'].includes(guests[idx].status)) guests[idx].status = 'enviada'; guests[idx].fecha_envio = new Date().toISOString(); }
         renderAll();
 
         const phone = g.telefono ? g.telefono.replace(/\D/g, '') : '';
@@ -169,22 +158,31 @@
             const pases = parseInt(overlay.querySelector('#_mc_pases').value) || 0;
             const nombres = Array.from(overlay.querySelectorAll('._mc_nombre')).map(inp => inp.value.trim());
             const acompNames = nombres.slice(1); // sin el titular
-            overlay.remove();
-            // Actualizar invitado
-            await fetch(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, {
-                method: 'PATCH', headers: { ...SB_H, 'Prefer': 'return=minimal' },
-                body: JSON.stringify({ status: asiste ? 'confirmada' : 'declinada', asiste, pases_confirmados: pases, fecha_confirmacion: new Date().toISOString() })
-            });
-            // Recrear acompanantes
-            await fetch(`${SB_URL}/rest/v1/acompanantes?invitado_id=eq.${id}`, { method: 'DELETE', headers: SB_H });
-            if (acompNames.length) {
-                await fetch(`${SB_URL}/rest/v1/acompanantes`, {
-                    method: 'POST', headers: { ...SB_H, 'Prefer': 'return=minimal' },
-                    body: JSON.stringify(acompNames.map((n, i) => ({ invitado_id: id, nombre: n, orden: i })))
+            const saveButton = overlay.querySelector('#_mc_save');
+            if (saveButton.disabled) return;
+            saveButton.disabled = true;
+            try {
+                // Actualizar invitado
+                await RsvpApi.request(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, {
+                    method: 'PATCH', headers: { ...SB_H, 'Prefer': 'return=minimal' },
+                    body: JSON.stringify({ status: asiste ? 'confirmada' : 'declinada', asiste, pases_confirmados: asiste ? pases : 0, fecha_confirmacion: new Date().toISOString() })
                 });
+                // Recrear acompanantes
+                await RsvpApi.request(`${SB_URL}/rest/v1/acompanantes?invitado_id=eq.${id}`, { method: 'DELETE', headers: SB_H });
+                if (asiste && acompNames.length) {
+                    await RsvpApi.request(`${SB_URL}/rest/v1/acompanantes`, {
+                        method: 'POST', headers: { ...SB_H, 'Prefer': 'return=minimal' },
+                        body: JSON.stringify(acompNames.map((n, i) => ({ invitado_id: id, nombre: n, orden: i })))
+                    });
+                }
+                await loadGuests();
+                overlay.remove();
+                showToast(asiste ? '✓ Confirmado' : '✓ Declinado');
+            } catch (error) {
+                showError('No se pudo completar la confirmación. Revisa los datos e intenta de nuevo.');
+            } finally {
+                saveButton.disabled = false;
             }
-            await loadGuests();
-            showToast(asiste ? '✓ Confirmado' : '✓ Declinado');
         });
         document.body.appendChild(overlay);
     }
@@ -361,7 +359,7 @@
     // ── Init ─────────────────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', function () {
         if (!checkPin()) return;
-        loadGuests();
+        loadGuests().catch(error => showError(error.message));
 
         document.getElementById('searchInput')?.addEventListener('input', renderTable);
 
@@ -420,5 +418,8 @@
         window.closeGuestModal = closeGuestModal;
     });
 
-    window.RSVP_ADMIN = { sendWhatsApp, copyLink, deleteGuest, openEdit, confirmManual };
+    const handleAction = action => async (...args) => {
+        try { await action(...args); } catch (error) { showError(error.message); }
+    };
+    window.RSVP_ADMIN = { sendWhatsApp: handleAction(sendWhatsApp), copyLink, deleteGuest: handleAction(deleteGuest), openEdit, confirmManual };
 })();

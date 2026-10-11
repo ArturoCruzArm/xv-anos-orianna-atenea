@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
-    <link rel="stylesheet" href="css/index.css?v=20261010">
+    <link rel="stylesheet" href="css/index.css?v=20261011">
 
+    <script src="js/rsvp-api.js?v=20261011"></script>
 </head>
 <body>
 
@@ -506,6 +507,7 @@
 
     // Solo manejar envio si NO hay token (rsvp-guest.js maneja el caso con token)
     const hasToken = new URLSearchParams(window.location.search).has('inv');
+    let directGuestId = null;
     if (rsvpForm && !hasToken) {
         rsvpForm.addEventListener('submit', async e => {
             e.preventDefault();
@@ -517,20 +519,32 @@
 
             if (!name || !attendance) return;
             const asiste = attendance === 'si';
+            const btn = document.getElementById('btnRSVP');
+            if (btn.disabled) return;
+            btn.disabled = true;
 
             try {
-                const evR = await fetch(ATN_SB_URL+'/rest/v1/eventos?slug=eq.xv-anos-orianna-atenea&select=id&limit=1',{headers:ATN_SB_H});
+                const evR = await RsvpApi.request(ATN_SB_URL+'/rest/v1/eventos?slug=eq.xv-anos-orianna-atenea&select=id&limit=1',{headers:ATN_SB_H});
                 const [ev] = await evR.json();
-                if (ev?.id) {
-                    const r_inv = await fetch(ATN_SB_URL+'/rest/v1/invitados',{method:'POST',headers:{...ATN_SB_H,'Prefer':'return=representation'},
-                        body:JSON.stringify({evento_id:ev.id,nombre:name,pases_asignados:gCount,pases_confirmados:gCount,asiste:asiste,status:asiste?'confirmada':'declinada',mensaje:mensaje||null,fecha_confirmacion:new Date().toISOString()})});
-                    const [inv] = await r_inv.json();
-                    if (inv?.id && nombres.length) {
-                        await fetch(ATN_SB_URL+'/rest/v1/acompanantes',{method:'POST',headers:{...ATN_SB_H,'Prefer':'return=minimal'},
-                            body:JSON.stringify(nombres.map((n,i)=>({invitado_id:inv.id,nombre:n,orden:i})))});
-                    }
+                if (!ev?.id) throw new Error('No se encontró el evento.');
+                const r_inv = await RsvpApi.request(ATN_SB_URL+'/rest/v1/invitados'+(directGuestId?'?id=eq.'+encodeURIComponent(directGuestId):''),{method:directGuestId?'PATCH':'POST',headers:{...ATN_SB_H,'Prefer':'return=representation'},
+                    body:JSON.stringify({evento_id:ev.id,nombre:name,pases_asignados:gCount,pases_confirmados:asiste?gCount:0,asiste:asiste,status:asiste?'confirmada':'declinada',mensaje:mensaje||null,fecha_confirmacion:new Date().toISOString()})});
+                const [inv] = await r_inv.json();
+                if (!inv?.id) throw new Error('No se pudo verificar la confirmación.');
+                directGuestId = inv.id;
+                await RsvpApi.request(ATN_SB_URL+'/rest/v1/acompanantes?invitado_id=eq.'+encodeURIComponent(inv.id),{method:'DELETE',headers:ATN_SB_H});
+                if (asiste && nombres.length) {
+                    await RsvpApi.request(ATN_SB_URL+'/rest/v1/acompanantes',{method:'POST',headers:{...ATN_SB_H,'Prefer':'return=minimal'},
+                        body:JSON.stringify(nombres.map((n,i)=>({invitado_id:inv.id,nombre:n,orden:i})))});
                 }
-            } catch(e){}
+            } catch(e) {
+                alert(directGuestId
+                    ? 'Tu registro se guardó, pero no se completaron todos los datos. Reintenta para actualizarlo.'
+                    : 'No se pudo verificar la confirmación. Intenta de nuevo.');
+                return;
+            } finally {
+                btn.disabled = false;
+            }
 
             // Mostrar mensaje de exito con opcion de WhatsApp
             rsvpForm.style.display = 'none';
@@ -556,11 +570,11 @@
 
 })();
 </script>
-    <script src="js/visitas.js?v=20261010"></script>
+    <script src="js/visitas.js?v=20261011"></script>
 
-    <script src="js/rsvp-guest.js?v=20261010"></script>
-<script src="js/foro7-footer.js?v=20261010"></script>
+    <script src="js/rsvp-guest.js?v=20261011"></script>
+<script src="js/foro7-footer.js?v=20261011"></script>
 <script>window.EVENTO_SLUG='xv-anos-orianna-atenea';</script>
-<script src="js/evento-loader.js?v=20261010"></script>
+<script src="js/evento-loader.js?v=20261011"></script>
 </body>
 </html>

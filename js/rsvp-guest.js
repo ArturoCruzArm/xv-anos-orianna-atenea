@@ -22,7 +22,7 @@
 
     async function loadGuest() {
         try {
-            const r = await fetch(
+            const r = await RsvpApi.request(
                 `${SB_URL}/rest/v1/invitados?token=eq.${encodeURIComponent(token)}&select=id,nombre,pases_asignados,mesa_asignada,status,asiste,pases_confirmados,mensaje&limit=1`,
                 { headers: SB_H }
             );
@@ -30,7 +30,7 @@
             if (!rows.length) { showNotFound(); return; }
             guestData = rows[0];
             // Cargar acompanantes
-            const aR = await fetch(
+            const aR = await RsvpApi.request(
                 `${SB_URL}/rest/v1/acompanantes?invitado_id=eq.${guestData.id}&order=orden.asc`,
                 { headers: SB_H }
             );
@@ -43,7 +43,7 @@
 
     async function markAsViewed(id) {
         try {
-            await fetch(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, {
+            await RsvpApi.request(`${SB_URL}/rest/v1/invitados?id=eq.${id}`, {
                 method: 'PATCH', headers: { ...SB_H, 'Prefer': 'return=minimal' },
                 body: JSON.stringify({ status: 'vista', fecha_vista: new Date().toISOString() })
             });
@@ -53,19 +53,18 @@
     async function submitRSVP(asiste, pases, nombre, mensaje, nombresAcomp) {
         const body = {
             status: asiste ? 'confirmada' : 'declinada',
-            asiste, pases_confirmados: pases,
+            asiste, pases_confirmados: asiste ? pases : 0,
             mensaje: mensaje || null,
             fecha_confirmacion: new Date().toISOString()
         };
-        const r = await fetch(`${SB_URL}/rest/v1/invitados?id=eq.${guestData.id}`, {
+        await RsvpApi.request(`${SB_URL}/rest/v1/invitados?id=eq.${guestData.id}`, {
             method: 'PATCH', headers: { ...SB_H, 'Prefer': 'return=minimal' },
             body: JSON.stringify(body)
         });
-        if (!r.ok) return false;
         // Actualizar acompanantes
-        await fetch(`${SB_URL}/rest/v1/acompanantes?invitado_id=eq.${guestData.id}`, { method: 'DELETE', headers: SB_H });
-        if (nombresAcomp.length) {
-            await fetch(`${SB_URL}/rest/v1/acompanantes`, {
+        await RsvpApi.request(`${SB_URL}/rest/v1/acompanantes?invitado_id=eq.${guestData.id}`, { method: 'DELETE', headers: SB_H });
+        if (asiste && nombresAcomp.length) {
+            await RsvpApi.request(`${SB_URL}/rest/v1/acompanantes`, {
                 method: 'POST', headers: { ...SB_H, 'Prefer': 'return=minimal' },
                 body: JSON.stringify(nombresAcomp.map((n, i) => ({ invitado_id: guestData.id, nombre: n, orden: i })))
             });
@@ -243,7 +242,12 @@
             const btn = form.querySelector('button[type="submit"]');
             if (btn) { btn.disabled = true; btn.innerHTML = 'Enviando...'; }
 
-            const ok = await submitRSVP(asiste, pases, nombre, mensaje, nombresAcomp);
+            let ok = false;
+            try {
+                ok = await submitRSVP(asiste, pases, nombre, mensaje, nombresAcomp);
+            } catch (error) {
+                console.warn('No se pudo completar la confirmación:', error);
+            }
 
             if (ok) {
                 form.style.display = 'none';
