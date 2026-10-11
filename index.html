@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
-    <link rel="stylesheet" href="css/index.css?v=20261011-2">
+    <link rel="stylesheet" href="css/index.css?v=20261011-3">
 
-    <script src="js/rsvp-api.js?v=20261011-2"></script>
+    <script src="js/rsvp-api.js?v=20261011-3"></script>
 </head>
 <body>
 
@@ -44,11 +44,10 @@
 </div>
 
 <!-- ─── Audio ────────────────────────────────────────────────── -->
-<div id="youtube-player" aria-hidden="true"></div>
-<script defer src="https://www.youtube.com/iframe_api"></script>
+<audio id="invitation-audio" preload="none" loop src="audio/mis-quince-mi-historia.mp3?v=20261011-3"></audio>
 
 <!-- ─── Music button ─────────────────────────────────────────── -->
-<button id="music-btn" aria-label="Pausar música">
+<button id="music-btn" aria-label="Reproducir canción de Orianna Atenea" aria-pressed="false">
     <i class="fas fa-music" id="music-icon"></i>
 </button>
 
@@ -352,49 +351,33 @@
     const invitation = document.getElementById('invitation');
     const musicBtn   = document.getElementById('music-btn');
     const musicIcon  = document.getElementById('music-icon');
-    let youtubePlayer;
-    let youtubeReady = false;
-    let musicRequested = false;
+    const invitationAudio = document.getElementById('invitation-audio');
+    invitationAudio.volume = 0.58;
     let opened = false;
 
-    window.onYouTubeIframeAPIReady = function () {
-        youtubePlayer = new YT.Player('youtube-player', {
-            height: '1',
-            width: '1',
-            videoId: 'lY5V4hSLWY8',
-            playerVars: {
-                autoplay: 0,
-                controls: 0,
-                disablekb: 1,
-                loop: 1,
-                playlist: 'lY5V4hSLWY8',
-                playsinline: 1,
-                rel: 0
-            },
-            events: {
-                onReady(event) {
-                    youtubeReady = true;
-                    event.target.setVolume(58);
-                    if (musicRequested) event.target.playVideo();
-                },
-                onStateChange(event) {
-                    const playing = event.data === YT.PlayerState.PLAYING;
-                    musicBtn.classList.toggle('playing', playing);
-                    musicIcon.className = playing ? 'fas fa-pause' : 'fas fa-music';
-                    musicBtn.setAttribute('aria-label', playing ? 'Pausar música' : 'Reanudar música');
-                }
-            }
-        });
-    };
+    function updateMusicButton() {
+        const playing = !invitationAudio.paused && !invitationAudio.ended;
+        musicBtn.classList.toggle('playing', playing);
+        musicBtn.setAttribute('aria-pressed', String(playing));
+        musicIcon.className = playing ? 'fas fa-pause' : 'fas fa-music';
+        musicBtn.setAttribute('aria-label', playing ? 'Pausar canción de Orianna Atenea' : 'Reproducir canción de Orianna Atenea');
+    }
+    invitationAudio.addEventListener('play', updateMusicButton);
+    invitationAudio.addEventListener('pause', updateMusicButton);
+    invitationAudio.addEventListener('ended', updateMusicButton);
+    invitationAudio.addEventListener('error', () => {
+        invitationAudio.pause();
+        updateMusicButton();
+        musicBtn.setAttribute('aria-label', 'No se pudo cargar la canción. Toca para reintentar');
+    });
 
     function playMusic() {
-        musicRequested = true;
-        if (youtubeReady) youtubePlayer.playVideo();
+        if (invitationAudio.error) invitationAudio.load();
+        invitationAudio.play().catch(() => updateMusicButton());
     }
 
     function pauseMusic() {
-        musicRequested = false;
-        if (youtubeReady) youtubePlayer.pauseVideo();
+        invitationAudio.pause();
     }
 
     function openEnvelope() {
@@ -428,7 +411,7 @@
 
     /* ── Music button ─────────────────────────────────────── */
     musicBtn.addEventListener('click', () => {
-        if (!youtubeReady || youtubePlayer.getPlayerState() !== YT.PlayerState.PLAYING) {
+        if (invitationAudio.paused) {
             playMusic();
         } else {
             pauseMusic();
@@ -570,11 +553,11 @@
 
 })();
 </script>
-    <script src="js/visitas.js?v=20261011-2"></script>
+    <script src="js/visitas.js?v=20261011-3"></script>
 
-    <script src="js/rsvp-guest.js?v=20261011-2"></script>
-<script src="js/foro7-footer.js?v=20261011-2"></script>
+    <script src="js/rsvp-guest.js?v=20261011-3"></script>
+<script src="js/foro7-footer.js?v=20261011-3"></script>
 <script>window.EVENTO_SLUG='xv-anos-orianna-atenea';</script>
-<script src="js/evento-loader.js?v=20261011-2"></script>
+<script src="js/evento-loader.js?v=20261011-3"></script>
 </body>
 </html>
