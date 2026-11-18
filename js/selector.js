@@ -39,273 +39,390 @@ async function sbRegistrarVisita(pagina = 'selector') {
 // ========================================
 // GLOBAL VARIABLES - XV Años Orianna Atenea
 // ========================================
-// Sesión fotográfica previa del 7 de noviembre de 2026 (261 fotos).
-// Las fotos del evento se AGREGAN AL FINAL para no cambiar los índices ya seleccionados.
-const photos = [
-    'imagenes/IMG_0528.webp',
-    'imagenes/IMG_0529.webp',
-    'imagenes/IMG_0530.webp',
-    'imagenes/IMG_0531.webp',
-    'imagenes/IMG_0532.webp',
-    'imagenes/IMG_0533.webp',
-    'imagenes/IMG_0534.webp',
-    'imagenes/IMG_0535.webp',
-    'imagenes/IMG_0536.webp',
-    'imagenes/IMG_0537.webp',
-    'imagenes/IMG_0538.webp',
-    'imagenes/IMG_0539.webp',
-    'imagenes/IMG_0540.webp',
-    'imagenes/IMG_0541.webp',
-    'imagenes/IMG_0542.webp',
-    'imagenes/IMG_0543.webp',
-    'imagenes/IMG_0544.webp',
-    'imagenes/IMG_0545.webp',
-    'imagenes/IMG_0546.webp',
-    'imagenes/IMG_0547.webp',
-    'imagenes/IMG_0548.webp',
-    'imagenes/IMG_0549.webp',
-    'imagenes/IMG_0550.webp',
-    'imagenes/IMG_0551.webp',
-    'imagenes/IMG_0552.webp',
-    'imagenes/IMG_0553.webp',
-    'imagenes/IMG_0554.webp',
-    'imagenes/IMG_0555.webp',
-    'imagenes/IMG_0556.webp',
-    'imagenes/IMG_0557.webp',
-    'imagenes/IMG_0558.webp',
-    'imagenes/IMG_0559.webp',
-    'imagenes/IMG_0560.webp',
-    'imagenes/IMG_0561.webp',
-    'imagenes/IMG_0562.webp',
-    'imagenes/IMG_0563.webp',
-    'imagenes/IMG_0564.webp',
-    'imagenes/IMG_0565.webp',
-    'imagenes/IMG_0566.webp',
-    'imagenes/IMG_0567.webp',
-    'imagenes/IMG_0568.webp',
-    'imagenes/IMG_0569.webp',
-    'imagenes/IMG_0570.webp',
-    'imagenes/IMG_0571.webp',
-    'imagenes/IMG_0572.webp',
-    'imagenes/IMG_0573.webp',
-    'imagenes/IMG_0574.webp',
-    'imagenes/IMG_0575.webp',
-    'imagenes/IMG_0576.webp',
-    'imagenes/IMG_0577.webp',
-    'imagenes/IMG_0578.webp',
-    'imagenes/IMG_0579.webp',
-    'imagenes/IMG_0580.webp',
-    'imagenes/IMG_0581.webp',
-    'imagenes/IMG_0582.webp',
-    'imagenes/IMG_0583.webp',
-    'imagenes/IMG_0584.webp',
-    'imagenes/IMG_0585.webp',
-    'imagenes/IMG_0586.webp',
-    'imagenes/IMG_0587.webp',
-    'imagenes/IMG_0588.webp',
-    'imagenes/IMG_0589.webp',
-    'imagenes/IMG_0590.webp',
-    'imagenes/IMG_0591.webp',
-    'imagenes/IMG_0592.webp',
-    'imagenes/IMG_0593.webp',
-    'imagenes/IMG_0594.webp',
-    'imagenes/IMG_0595.webp',
-    'imagenes/IMG_0596.webp',
-    'imagenes/IMG_0597.webp',
-    'imagenes/IMG_0598.webp',
-    'imagenes/IMG_0599.webp',
-    'imagenes/IMG_0600.webp',
-    'imagenes/IMG_0601.webp',
-    'imagenes/IMG_0602.webp',
-    'imagenes/IMG_0603.webp',
-    'imagenes/IMG_0604.webp',
-    'imagenes/IMG_0605.webp',
-    'imagenes/IMG_0606.webp',
-    'imagenes/IMG_0607.webp',
-    'imagenes/IMG_0608.webp',
-    'imagenes/IMG_0609.webp',
-    'imagenes/IMG_0610.webp',
-    'imagenes/IMG_0611.webp',
-    'imagenes/IMG_0612.webp',
-    'imagenes/IMG_0613.webp',
-    'imagenes/IMG_0614.webp',
-    'imagenes/IMG_0615.webp',
-    'imagenes/IMG_0616.webp',
-    'imagenes/IMG_0617.webp',
-    'imagenes/IMG_0618.webp',
-    'imagenes/IMG_0619.webp',
-    'imagenes/IMG_0620.webp',
-    'imagenes/IMG_0621.webp',
-    'imagenes/IMG_0622.webp',
-    'imagenes/IMG_0623.webp',
-    'imagenes/IMG_0624.webp',
-    'imagenes/IMG_0625.webp',
-    'imagenes/IMG_0626.webp',
-    'imagenes/IMG_0627.webp',
-    'imagenes/IMG_0628.webp',
-    'imagenes/IMG_0629.webp',
-    'imagenes/IMG_0630.webp',
-    'imagenes/IMG_0631.webp',
-    'imagenes/IMG_0632.webp',
-    'imagenes/IMG_0633.webp',
-    'imagenes/IMG_0634.webp',
-    'imagenes/IMG_0635.webp',
-    'imagenes/IMG_0639.webp',
-    'imagenes/IMG_0640.webp',
-    'imagenes/IMG_0641.webp',
-    'imagenes/IMG_0643.webp',
-    'imagenes/IMG_0644.webp',
-    'imagenes/IMG_0645.webp',
-    'imagenes/IMG_0646.webp',
-    'imagenes/IMG_0647.webp',
-    'imagenes/IMG_0648.webp',
-    'imagenes/IMG_0649.webp',
-    'imagenes/IMG_0650.webp',
-    'imagenes/IMG_0651.webp',
-    'imagenes/IMG_0652.webp',
-    'imagenes/IMG_0653.webp',
-    'imagenes/IMG_0654.webp',
-    'imagenes/IMG_0655.webp',
-    'imagenes/IMG_0659.webp',
-    'imagenes/IMG_0660.webp',
-    'imagenes/IMG_0661.webp',
-    'imagenes/IMG_0662.webp',
-    'imagenes/IMG_0663.webp',
-    'imagenes/IMG_0664.webp',
-    'imagenes/IMG_0665.webp',
-    'imagenes/IMG_0666.webp',
-    'imagenes/IMG_0667.webp',
-    'imagenes/IMG_0668.webp',
-    'imagenes/IMG_0669.webp',
-    'imagenes/IMG_0670.webp',
-    'imagenes/IMG_0671.webp',
-    'imagenes/IMG_0672.webp',
-    'imagenes/IMG_0673.webp',
-    'imagenes/IMG_0674.webp',
-    'imagenes/IMG_0675.webp',
-    'imagenes/IMG_0676.webp',
-    'imagenes/IMG_0677.webp',
-    'imagenes/IMG_0678.webp',
-    'imagenes/IMG_0679.webp',
-    'imagenes/IMG_0680.webp',
-    'imagenes/IMG_0681.webp',
-    'imagenes/IMG_0682.webp',
-    'imagenes/IMG_0683.webp',
-    'imagenes/IMG_0684.webp',
-    'imagenes/IMG_0685.webp',
-    'imagenes/IMG_0686.webp',
-    'imagenes/IMG_0687.webp',
-    'imagenes/IMG_0688.webp',
-    'imagenes/IMG_0689.webp',
-    'imagenes/IMG_0690.webp',
-    'imagenes/IMG_0691.webp',
-    'imagenes/IMG_0692.webp',
-    'imagenes/IMG_0693.webp',
-    'imagenes/IMG_0694.webp',
-    'imagenes/IMG_0695.webp',
-    'imagenes/IMG_0696.webp',
-    'imagenes/IMG_0697.webp',
-    'imagenes/IMG_0698.webp',
-    'imagenes/IMG_0699.webp',
-    'imagenes/IMG_0700.webp',
-    'imagenes/IMG_0701.webp',
-    'imagenes/IMG_0702.webp',
-    'imagenes/IMG_0703.webp',
-    'imagenes/IMG_0704.webp',
-    'imagenes/IMG_0705.webp',
-    'imagenes/IMG_0706.webp',
-    'imagenes/IMG_0707.webp',
-    'imagenes/IMG_0708.webp',
-    'imagenes/IMG_0709.webp',
-    'imagenes/IMG_0710.webp',
-    'imagenes/IMG_0711.webp',
-    'imagenes/IMG_0712.webp',
-    'imagenes/IMG_0713.webp',
-    'imagenes/IMG_0714.webp',
-    'imagenes/IMG_0715.webp',
-    'imagenes/IMG_0716.webp',
-    'imagenes/IMG_0717.webp',
-    'imagenes/IMG_0718.webp',
-    'imagenes/IMG_0719.webp',
-    'imagenes/IMG_0720.webp',
-    'imagenes/IMG_0721.webp',
-    'imagenes/IMG_0722.webp',
-    'imagenes/IMG_0723.webp',
-    'imagenes/IMG_0724.webp',
-    'imagenes/IMG_0725.webp',
-    'imagenes/IMG_0726.webp',
-    'imagenes/IMG_0727.webp',
-    'imagenes/IMG_0728.webp',
-    'imagenes/IMG_0729.webp',
-    'imagenes/IMG_0730.webp',
-    'imagenes/IMG_0731.webp',
-    'imagenes/IMG_0732.webp',
-    'imagenes/IMG_0733.webp',
-    'imagenes/IMG_0734.webp',
-    'imagenes/IMG_0735.webp',
-    'imagenes/IMG_0736.webp',
-    'imagenes/IMG_0737.webp',
-    'imagenes/IMG_0738.webp',
-    'imagenes/IMG_0739.webp',
-    'imagenes/IMG_0740.webp',
-    'imagenes/IMG_0741.webp',
-    'imagenes/IMG_0742.webp',
-    'imagenes/IMG_0743.webp',
-    'imagenes/IMG_0744.webp',
-    'imagenes/IMG_0745.webp',
-    'imagenes/IMG_0746.webp',
-    'imagenes/IMG_0747.webp',
-    'imagenes/IMG_0748.webp',
-    'imagenes/IMG_0749.webp',
-    'imagenes/IMG_0750.webp',
-    'imagenes/IMG_0751.webp',
-    'imagenes/IMG_0752.webp',
-    'imagenes/IMG_0753.webp',
-    'imagenes/IMG_0754.webp',
-    'imagenes/IMG_0755.webp',
-    'imagenes/IMG_0756.webp',
-    'imagenes/IMG_0757.webp',
-    'imagenes/IMG_0758.webp',
-    'imagenes/IMG_0759.webp',
-    'imagenes/IMG_0760.webp',
-    'imagenes/IMG_0761.webp',
-    'imagenes/IMG_0762.webp',
-    'imagenes/IMG_0763.webp',
-    'imagenes/IMG_0764.webp',
-    'imagenes/IMG_0765.webp',
-    'imagenes/IMG_0766.webp',
-    'imagenes/IMG_0767.webp',
-    'imagenes/IMG_0768.webp',
-    'imagenes/IMG_0769.webp',
-    'imagenes/IMG_0770.webp',
-    'imagenes/IMG_0771.webp',
-    'imagenes/IMG_0772.webp',
-    'imagenes/IMG_0773.webp',
-    'imagenes/IMG_0778.webp',
-    'imagenes/IMG_0779.webp',
-    'imagenes/IMG_0780.webp',
-    'imagenes/IMG_0781.webp',
-    'imagenes/IMG_0782.webp',
-    'imagenes/IMG_0783.webp',
-    'imagenes/IMG_0784.webp',
-    'imagenes/IMG_0785.webp',
-    'imagenes/IMG_0786.webp',
-    'imagenes/IMG_0787.webp',
-    'imagenes/IMG_0788.webp',
-    'imagenes/IMG_0789.webp',
-    'imagenes/IMG_0790.webp',
-    'imagenes/IMG_0791.webp',
-    'imagenes/IMG_0792.webp',
-    'imagenes/IMG_0793.webp',
-    'imagenes/IMG_0794.webp',
-    'imagenes/IMG_0795.webp',
-    'imagenes/IMG_0796.webp',
-    'imagenes/IMG_0797.webp',
-    'imagenes/IMG_0798.webp',
-    'imagenes/IMG_0799.webp'
+// Selección de entrega: originales, correcciones de luz y tres versiones con luz guiada por IA.
+// El índice histórico identifica la misma foto en localStorage y Supabase.
+// Se conserva aunque se retire una toma o se sustituya por su versión editada.
+const photoCatalog = [
+  {
+    "index": 10,
+    "file": "imagenes/cliente/IMG_0538.webp"
+  },
+  {
+    "index": 12,
+    "file": "imagenes/cliente/IMG_0540.webp"
+  },
+  {
+    "index": 15,
+    "file": "imagenes/cliente/IMG_0543.webp"
+  },
+  {
+    "index": 17,
+    "file": "imagenes/cliente/IMG_0545.webp"
+  },
+  {
+    "index": 18,
+    "file": "imagenes/cliente/IMG_0546.webp"
+  },
+  {
+    "index": 19,
+    "file": "imagenes/cliente/IMG_0547.webp"
+  },
+  {
+    "index": 21,
+    "file": "imagenes/cliente/IMG_0549.webp"
+  },
+  {
+    "index": 24,
+    "file": "imagenes/cliente/IMG_0552.webp"
+  },
+  {
+    "index": 25,
+    "file": "imagenes/cliente/IMG_0553.webp"
+  },
+  {
+    "index": 26,
+    "file": "imagenes/cliente/IMG_0554.webp"
+  },
+  {
+    "index": 27,
+    "file": "imagenes/cliente/IMG_0555.webp"
+  },
+  {
+    "index": 30,
+    "file": "imagenes/cliente/IMG_0558.webp"
+  },
+  {
+    "index": 33,
+    "file": "imagenes/cliente/IMG_0561.webp"
+  },
+  {
+    "index": 35,
+    "file": "imagenes/cliente/IMG_0563.webp"
+  },
+  {
+    "index": 38,
+    "file": "imagenes/cliente/IMG_0566.webp"
+  },
+  {
+    "index": 41,
+    "file": "imagenes/cliente/IMG_0569.webp"
+  },
+  {
+    "index": 42,
+    "file": "imagenes/cliente/IMG_0570.webp"
+  },
+  {
+    "index": 44,
+    "file": "imagenes/cliente/IMG_0572.webp"
+  },
+  {
+    "index": 47,
+    "file": "imagenes/cliente/IMG_0575.webp"
+  },
+  {
+    "index": 49,
+    "file": "imagenes/cliente/IMG_0577.webp"
+  },
+  {
+    "index": 51,
+    "file": "imagenes/cliente/IMG_0579.webp"
+  },
+  {
+    "index": 54,
+    "file": "imagenes/cliente/IMG_0582.webp"
+  },
+  {
+    "index": 56,
+    "file": "imagenes/cliente/IMG_0584.webp"
+  },
+  {
+    "index": 57,
+    "file": "imagenes/cliente/IMG_0585.webp"
+  },
+  {
+    "index": 60,
+    "file": "imagenes/cliente/IMG_0588.webp"
+  },
+  {
+    "index": 62,
+    "file": "imagenes/cliente/IMG_0590.webp"
+  },
+  {
+    "index": 64,
+    "file": "imagenes/cliente/IMG_0592.webp"
+  },
+  {
+    "index": 67,
+    "file": "imagenes/cliente/IMG_0595.webp"
+  },
+  {
+    "index": 68,
+    "file": "imagenes/cliente/IMG_0596.webp"
+  },
+  {
+    "index": 69,
+    "file": "imagenes/cliente/IMG_0597_IA_luz.webp"
+  },
+  {
+    "index": 70,
+    "file": "imagenes/cliente/IMG_0598.webp"
+  },
+  {
+    "index": 72,
+    "file": "imagenes/cliente/IMG_0600.webp"
+  },
+  {
+    "index": 73,
+    "file": "imagenes/cliente/IMG_0601.webp"
+  },
+  {
+    "index": 76,
+    "file": "imagenes/cliente/IMG_0604.webp"
+  },
+  {
+    "index": 78,
+    "file": "imagenes/cliente/IMG_0606.webp"
+  },
+  {
+    "index": 79,
+    "file": "imagenes/cliente/IMG_0607.webp"
+  },
+  {
+    "index": 82,
+    "file": "imagenes/cliente/IMG_0610.webp"
+  },
+  {
+    "index": 86,
+    "file": "imagenes/cliente/IMG_0614.webp"
+  },
+  {
+    "index": 87,
+    "file": "imagenes/cliente/IMG_0615.webp"
+  },
+  {
+    "index": 89,
+    "file": "imagenes/cliente/IMG_0617.webp"
+  },
+  {
+    "index": 91,
+    "file": "imagenes/cliente/IMG_0619.webp"
+  },
+  {
+    "index": 93,
+    "file": "imagenes/cliente/IMG_0621.webp"
+  },
+  {
+    "index": 99,
+    "file": "imagenes/cliente/IMG_0627.webp"
+  },
+  {
+    "index": 102,
+    "file": "imagenes/cliente/IMG_0630.webp"
+  },
+  {
+    "index": 103,
+    "file": "imagenes/cliente/IMG_0631.webp"
+  },
+  {
+    "index": 105,
+    "file": "imagenes/cliente/IMG_0633.webp"
+  },
+  {
+    "index": 118,
+    "file": "imagenes/cliente/IMG_0650.webp"
+  },
+  {
+    "index": 121,
+    "file": "imagenes/cliente/IMG_0653.webp"
+  },
+  {
+    "index": 123,
+    "file": "imagenes/cliente/IMG_0655.webp"
+  },
+  {
+    "index": 129,
+    "file": "imagenes/cliente/IMG_0664.webp"
+  },
+  {
+    "index": 130,
+    "file": "imagenes/cliente/IMG_0665.webp"
+  },
+  {
+    "index": 133,
+    "file": "imagenes/cliente/IMG_0668.webp"
+  },
+  {
+    "index": 139,
+    "file": "imagenes/cliente/IMG_0674.webp"
+  },
+  {
+    "index": 143,
+    "file": "imagenes/cliente/IMG_0678.webp"
+  },
+  {
+    "index": 149,
+    "file": "imagenes/cliente/IMG_0684.webp"
+  },
+  {
+    "index": 150,
+    "file": "imagenes/cliente/IMG_0685.webp"
+  },
+  {
+    "index": 151,
+    "file": "imagenes/cliente/IMG_0686.webp"
+  },
+  {
+    "index": 153,
+    "file": "imagenes/cliente/IMG_0688.webp"
+  },
+  {
+    "index": 157,
+    "file": "imagenes/cliente/IMG_0692.webp"
+  },
+  {
+    "index": 159,
+    "file": "imagenes/cliente/IMG_0694.webp"
+  },
+  {
+    "index": 161,
+    "file": "imagenes/cliente/IMG_0696.webp"
+  },
+  {
+    "index": 162,
+    "file": "imagenes/cliente/IMG_0697_IA_luz.webp"
+  },
+  {
+    "index": 170,
+    "file": "imagenes/cliente/IMG_0705.webp"
+  },
+  {
+    "index": 173,
+    "file": "imagenes/cliente/IMG_0708.webp"
+  },
+  {
+    "index": 175,
+    "file": "imagenes/cliente/IMG_0710.webp"
+  },
+  {
+    "index": 176,
+    "file": "imagenes/cliente/IMG_0711.webp"
+  },
+  {
+    "index": 179,
+    "file": "imagenes/cliente/IMG_0714.webp"
+  },
+  {
+    "index": 181,
+    "file": "imagenes/cliente/IMG_0716.webp"
+  },
+  {
+    "index": 186,
+    "file": "imagenes/cliente/IMG_0721.webp"
+  },
+  {
+    "index": 189,
+    "file": "imagenes/cliente/IMG_0724.webp"
+  },
+  {
+    "index": 191,
+    "file": "imagenes/cliente/IMG_0726.webp"
+  },
+  {
+    "index": 195,
+    "file": "imagenes/cliente/IMG_0730.webp"
+  },
+  {
+    "index": 199,
+    "file": "imagenes/cliente/IMG_0734.webp"
+  },
+  {
+    "index": 212,
+    "file": "imagenes/cliente/IMG_0747.webp"
+  },
+  {
+    "index": 214,
+    "file": "imagenes/cliente/IMG_0749.webp"
+  },
+  {
+    "index": 215,
+    "file": "imagenes/cliente/IMG_0750.webp"
+  },
+  {
+    "index": 217,
+    "file": "imagenes/cliente/IMG_0752.webp"
+  },
+  {
+    "index": 220,
+    "file": "imagenes/cliente/IMG_0755.webp"
+  },
+  {
+    "index": 221,
+    "file": "imagenes/cliente/IMG_0756.webp"
+  },
+  {
+    "index": 224,
+    "file": "imagenes/cliente/IMG_0759.webp"
+  },
+  {
+    "index": 227,
+    "file": "imagenes/cliente/IMG_0762.webp"
+  },
+  {
+    "index": 229,
+    "file": "imagenes/cliente/IMG_0764.webp"
+  },
+  {
+    "index": 231,
+    "file": "imagenes/cliente/IMG_0766.webp"
+  },
+  {
+    "index": 234,
+    "file": "imagenes/cliente/IMG_0769.webp"
+  },
+  {
+    "index": 235,
+    "file": "imagenes/cliente/IMG_0770_IA_luz.webp"
+  },
+  {
+    "index": 237,
+    "file": "imagenes/cliente/IMG_0772.webp"
+  },
+  {
+    "index": 246,
+    "file": "imagenes/cliente/IMG_0785.webp"
+  },
+  {
+    "index": 248,
+    "file": "imagenes/cliente/IMG_0787.webp"
+  },
+  {
+    "index": 249,
+    "file": "imagenes/cliente/IMG_0788.webp"
+  },
+  {
+    "index": 252,
+    "file": "imagenes/cliente/IMG_0791.webp"
+  },
+  {
+    "index": 254,
+    "file": "imagenes/cliente/IMG_0793.webp"
+  },
+  {
+    "index": 256,
+    "file": "imagenes/cliente/IMG_0795.webp"
+  },
+  {
+    "index": 260,
+    "file": "imagenes/cliente/IMG_0799.webp"
+  }
 ];
+const photos = [];
+photoCatalog.forEach(({index, file}) => { photos[index] = file; });
+const visiblePhotoIndexes = photoCatalog.map(photo => photo.index);
+const photoNumber = index => visiblePhotoIndexes.indexOf(index) + 1;
+
 // Miniatura (300 px) para la cuadrícula; la foto completa se usa en el visor y la descarga
-const thumbOf = (p) => p.replace('imagenes/', 'imagenes/thumb/');
+const thumbOf = (p) => p.replace(/([^/]+)$/, 'thumb/$1');
 const fileOf = (p) => p.split('/').pop().replace('.webp', '');
 
 // ── Configuración del evento (único lugar para cambiar datos del contrato) ──
@@ -343,7 +460,7 @@ let modalOpen = false;
 // ========================================
 function mostrarBannerSinSeleccion() {
     if (document.getElementById('banner-sin-sel')) return;
-    if (Object.keys(photoSelections).length > 0) return;
+    if (visiblePhotoIndexes.some(index => { const sel = photoSelections[index]; return sel && (sel.impresion || sel.invitacion || sel.descartada); })) return;
     if (CONFIG.fechaEvento > new Date()) return;
     const banner = document.createElement('div');
     banner.id = 'banner-sin-sel';
@@ -525,16 +642,20 @@ function getStats() {
         impresion: 0,
         invitacion: 0,
         descartada: 0,
-        sinClasificar: photos.length
+        sinClasificar: visiblePhotoIndexes.length
     };
 
-    Object.values(photoSelections).forEach(selection => {
+    Object.entries(photoSelections).forEach(([index, selection]) => {
+        if (!photos[index]) return;
         if (selection.impresion) stats.impresion++;
         if (selection.invitacion) stats.invitacion++;
         if (selection.descartada) stats.descartada++;
     });
 
-    stats.sinClasificar = photos.length - Object.keys(photoSelections).length;
+    stats.sinClasificar = visiblePhotoIndexes.filter(index => {
+        const selection = photoSelections[index] || {};
+        return !selection.impresion && !selection.invitacion && !selection.descartada;
+    }).length;
 
     return stats;
 }
@@ -586,7 +707,7 @@ function renderGallery() {
 
     grid.innerHTML = '';
 
-    if (photos.length === 0) {
+    if (visiblePhotoIndexes.length === 0) {
         grid.innerHTML = '<div class="no-photos-message">Las fotos estarán disponibles después del evento (21 de noviembre de 2026)</div>';
         return;
     }
@@ -618,7 +739,7 @@ function renderGallery() {
             badgesHTML += '</div>';
         }
 
-        const displayNumber = `Foto ${index + 1}`;
+        const displayNumber = `Foto ${photoNumber(index)} · ${fileOf(photo)}`;
         const mediaHTML = `
             <div class="photo-image-container">
                 <img data-src="${thumbOf(photo)}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'/%3E" alt="${displayNumber}" class="lazy-img">
@@ -717,7 +838,7 @@ function updateFilterButtons() {
     const btnDescartada = document.getElementById('btnFilterDescartada');
     const btnSinClasificar = document.getElementById('btnFilterSinClasificar');
 
-    if (btnAll) btnAll.textContent = `Todas (${photos.length})`;
+    if (btnAll) btnAll.textContent = `Todas (${visiblePhotoIndexes.length})`;
     if (btnImpresion) btnImpresion.textContent = `Impresión (${stats.impresion})`;
     if (btnInvitacion) btnInvitacion.textContent = `Invitación (${stats.invitacion})`;
     if (btnDescartada) btnDescartada.textContent = `Descartadas (${stats.descartada})`;
@@ -728,13 +849,14 @@ function updateFilterButtons() {
 // MODAL FUNCTIONS
 // ========================================
 function openModal(index) {
+    if (!photos[index]) return;
     currentPhotoIndex = index;
     try { localStorage.setItem(KEY_LAST, index); } catch (e) {}
     const modal = document.getElementById('photoModal');
     const modalPhotoNumber = document.getElementById('modalPhotoNumber');
 
     const photo = photos[index];
-    const displayNumber = `Foto ${index + 1}`;
+    const displayNumber = `Foto ${photoNumber(index)} · ${fileOf(photo)}`;
 
     modalPhotoNumber.textContent = displayNumber;
     document.getElementById('modalImage').src = photo;
@@ -762,14 +884,10 @@ function closeModal() {
 
 function navigatePhoto(direction) {
     if (currentPhotoIndex === null) return;
-    let newIndex;
-    if (direction === "next") {
-        newIndex = currentPhotoIndex + 1;
-        if (newIndex >= photos.length) newIndex = 0;
-    } else {
-        newIndex = currentPhotoIndex - 1;
-        if (newIndex < 0) newIndex = photos.length - 1;
-    }
+    const position = visiblePhotoIndexes.indexOf(currentPhotoIndex);
+    if (position < 0 || !visiblePhotoIndexes.length) return;
+    const step = direction === 'next' ? 1 : -1;
+    const newIndex = visiblePhotoIndexes[(position + step + visiblePhotoIndexes.length) % visiblePhotoIndexes.length];
     saveCurrentSelections();
     openModal(newIndex);
 }
@@ -876,7 +994,7 @@ function generateTextSummary(detalle = false) {
     summary += `📋 SEGÚN CONTRATO:\n`;
     summary += `   📸 Impresión incluida: ${LIMITES.impresion} fotos\n\n`;
     summary += `📊 RESUMEN ACTUAL:\n`;
-    summary += `   Total de fotos disponibles: ${photos.length}\n`;
+    summary += `   Total de fotos disponibles: ${visiblePhotoIndexes.length}\n`;
     summary += `   📸 Para impresión: ${stats.impresion}/${LIMITES.impresion} ${stats.impresion === LIMITES.impresion ? '✓' : stats.impresion > LIMITES.impresion ? '⚠️ ADICIONALES' : ''}\n`;
     summary += `   💌 Para invitación: ${stats.invitacion}\n`;
     summary += `   ❌ Descartadas: ${stats.descartada}\n`;
@@ -892,7 +1010,7 @@ function generateTextSummary(detalle = false) {
     if (detalle) {
         const lista = (cat) => photos.map((p, i) => ({ p, i }))
             .filter(({ i }) => photoSelections[i] && photoSelections[i][cat])
-            .map(({ p, i }) => `   Foto ${i + 1} (${fileOf(p)})`).join('\n') || '   (ninguna)';
+            .map(({ p, i }) => `   Foto ${photoNumber(i)} (${fileOf(p)})`).join('\n') || '   (ninguna)';
         summary += `📸 FOTOS PARA IMPRESIÓN:\n${lista('impresion')}\n\n`;
         summary += `💌 FOTOS PARA INVITACIÓN:\n${lista('invitacion')}\n\n`;
     }
@@ -1034,7 +1152,7 @@ async function downloadCurrentPhoto() {
     if (currentPhotoIndex === null) return;
     const url = photos[currentPhotoIndex];
     if (!url) return;
-    const filename = 'foto-' + (currentPhotoIndex + 1) + '.jpg';
+    const filename = fileOf(url) + '.jpg';
     showToast('Descargando...', 'success');
     try {
         const resp = await fetch(url, { mode: 'cors' });
