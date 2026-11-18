@@ -228,6 +228,10 @@ const photoCatalog = [
     "file": "imagenes/cliente/IMG_0633.webp"
   },
   {
+    "index": 109,
+    "file": "imagenes/cliente/IMG_0640.webp"
+  },
+  {
     "index": 118,
     "file": "imagenes/cliente/IMG_0650.webp"
   },

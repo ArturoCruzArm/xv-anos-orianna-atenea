@@ -16,14 +16,14 @@ function setup(){
   vm.createContext(context);vm.runInContext(code,context);
   return {run:s=>vm.runInContext(s,context),cards,requests};
 }
-test('Only the 93 delivered photos render, with their matching thumbnails',()=>{
-  const {run,cards}=setup();run('renderGallery()');assert.equal(cards.length,93);
+test('Only the 94 delivered photos render, with their matching thumbnails',()=>{
+  const {run,cards}=setup();run('renderGallery()');assert.equal(cards.length,94);
   assert.equal(cards[0].dataset.index,10);
   assert.match(cards[0].innerHTML,/Foto 1 · IMG_0538/);
   assert.match(cards[0].innerHTML,/imagenes\/cliente\/thumb\/IMG_0538.webp/);
   const catalog=JSON.parse(run('JSON.stringify(photoCatalog)'));
   assert.deepEqual(catalog,JSON.parse(fs.readFileSync(path.join(root,'js/fotos-cliente.json'))));
-  assert.equal(new Set(catalog.map(p=>p.index)).size,93);
+  assert.equal(new Set(catalog.map(p=>p.index)).size,94);
   for(const photo of catalog){
     assert.ok(fs.existsSync(path.join(root,photo.file)));
     assert.ok(fs.existsSync(path.join(root,photo.file.replace(/([^/]+)$/,'thumb/$1'))));
@@ -41,9 +41,9 @@ test('Original selection identifiers remain attached to the same photo, includin
 test('Hidden old selections do not inflate counts or leak into the client report',()=>{
   const {run}=setup();
   run('photoSelections={0:{impresion:true},10:{impresion:true},11:{invitacion:true},69:{invitacion:true},162:{}}');
-  assert.deepEqual(JSON.parse(run('JSON.stringify(getStats())')),{impresion:1,invitacion:1,descartada:0,sinClasificar:91});
+  assert.deepEqual(JSON.parse(run('JSON.stringify(getStats())')),{impresion:1,invitacion:1,descartada:0,sinClasificar:92});
   const report=run('generateTextSummary(true)');
-  assert.match(report,/Total de fotos disponibles: 93/);
+  assert.match(report,/Total de fotos disponibles: 94/);
   assert.match(report,/IMG_0538/);assert.match(report,/IMG_0597_IA_luz/);
   assert.doesNotMatch(report,/IMG_0528|IMG_0539/);
   assert.equal(run('photoSelections[0].impresion'),true);
