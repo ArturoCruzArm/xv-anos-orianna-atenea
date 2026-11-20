@@ -1,4 +1,4 @@
-const CACHE_SHELL = 'atenea-shell-v20261118-cliente2';
+const CACHE_SHELL = 'atenea-shell-v20261120-minuto';
 const CACHE_IMAGES = 'atenea-images-v20261118-cliente2';
 
 self.addEventListener('install', event => {
