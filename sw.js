@@ -1,4 +1,4 @@
-const CACHE_SHELL = 'atenea-shell-v20261120-minuto';
+const CACHE_SHELL = 'atenea-shell-v20261120-furina';
 const CACHE_IMAGES = 'atenea-images-v20261118-cliente2';
 
 self.addEventListener('install', event => {
@@ -37,7 +37,7 @@ self.addEventListener('fetch', event => {
     if (url.origin !== self.location.origin) return;
     if (event.request.method !== 'GET') return;
     // Let the browser handle audio range requests and HTTP caching.
-    if (url.pathname.includes('/audio/')) return;
+    if (url.pathname.includes('/audio/') || url.pathname.includes('/video/')) return;
 
     if (url.pathname.includes('/imagenes/')) {
         event.respondWith(

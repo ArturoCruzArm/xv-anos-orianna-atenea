@@ -14,6 +14,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
     <link rel="stylesheet" href="css/index.css?v=20261011-3">
+    <style>
+        .transform-wrap{position:relative;margin:18px auto 14px;max-width:min(94vw,760px);aspect-ratio:16/9;border-radius:8px;overflow:hidden;
+            border:1px solid rgba(215,242,251,.78);box-shadow:0 0 0 6px rgba(120,200,235,.16),0 26px 60px rgba(0,0,0,.55),0 0 80px rgba(120,200,235,.18);background:#070b1f}
+        .transform-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+        .sfx-btn{position:absolute;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(215,242,251,.6);
+            background:rgba(7,11,31,.6);color:#d7f2fb;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+        .sfx-btn:focus-visible{outline:2px solid #7fd8f2;outline-offset:2px}
+    </style>
 
     <script src="js/rsvp-api.js?v=20261011-3"></script>
 </head>
@@ -63,6 +71,14 @@
     <div class="container">
 
         <header>
+            <div class="transform-wrap" id="transformWrap">
+                <video id="transformVideo" src="video/transformacion-furina.mp4?v=20261120-furina" poster="video/transformacion-furina.jpg?v=20261120-furina"
+                       playsinline webkit-playsinline loop muted preload="metadata"
+                       aria-label="Atenea se transforma en Furina y de regreso en quinceañera"></video>
+                <button type="button" class="sfx-btn" id="sfxBtn" aria-label="Silenciar efectos" aria-pressed="true">
+                    <i class="fas fa-volume-high" aria-hidden="true"></i>
+                </button>
+            </div>
             <div class="hero-photo-wrap">
                 <img src="atenea.svg" alt="XV Años Orianna Atenea García Loera" class="hero-photo" loading="eager">
             </div>
@@ -394,6 +410,7 @@
 
         // 2. Start the selected song from the same user gesture
         playMusic();
+        startTransform();
         musicBtn.classList.add('visible');
 
         // 3. Show invitation
@@ -408,6 +425,31 @@
         setTimeout(() => {
             screen.classList.add('hide');
         }, 1300);
+    }
+
+    /* ── Transformación quinceañera ⇄ Furina (loop con efectos) ── */
+    const tVideo = document.getElementById('transformVideo');
+    const sfxBtn = document.getElementById('sfxBtn');
+    let sfxOn = true, tStarted = false, tVisible = true;
+    tVideo.volume = 0.5;
+    function syncSfx() {
+        tVideo.muted = !sfxOn;
+        sfxBtn.setAttribute('aria-pressed', String(sfxOn));
+        sfxBtn.setAttribute('aria-label', sfxOn ? 'Silenciar efectos' : 'Activar efectos');
+        sfxBtn.querySelector('i').className = sfxOn ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
+    }
+    function startTransform() {
+        tStarted = true;
+        syncSfx();
+        tVideo.play().catch(() => { tVideo.muted = true; tVideo.play().catch(() => {}); });
+    }
+    sfxBtn.addEventListener('click', () => { sfxOn = !sfxOn; syncSfx(); if (tStarted && tVideo.paused) tVideo.play().catch(() => {}); });
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => {
+            tVisible = e.isIntersecting;
+            if (!tStarted) return;
+            if (tVisible) tVideo.play().catch(() => {}); else tVideo.pause();
+        }, { threshold: 0.25 }).observe(tVideo);
     }
 
     screen.addEventListener('click', openEnvelope);
