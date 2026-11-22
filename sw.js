@@ -1,4 +1,4 @@
-const CACHE_SHELL = 'atenea-shell-v20261120-furina';
+const CACHE_SHELL = 'atenea-shell-v20261122-fiesta';
 const CACHE_IMAGES = 'atenea-images-v20261118-cliente2';
 
 self.addEventListener('install', event => {
