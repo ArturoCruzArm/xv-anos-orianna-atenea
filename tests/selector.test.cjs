@@ -5,7 +5,7 @@ const path=require('node:path');
 const vm=require('node:vm');
 const root=path.join(__dirname,'..');
 const code=fs.readFileSync(path.join(root,'js/selector.js'),'utf8');
-function setup(){
+function setup(modo){
   const cards=[], requests=[];
   const grid={innerHTML:'',appendChild(card){cards.push(card);}};
   const context={console,localStorage:{getItem(){return null;},setItem(){}},crypto:{randomUUID(){return 'test';}},
@@ -13,7 +13,16 @@ function setup(){
       getElementById(id){return id==='photosGrid'?grid:null;},querySelectorAll(){return [];},
       createElement(){return {dataset:{},classList:{add(){},toggle(){}},addEventListener(){}};}},
     fetch:async(url,options)=>{requests.push({url,options});return {ok:true};}};
-  vm.createContext(context);vm.runInContext(code,context);
+  if(modo==='todas'){
+    vm.createContext(context);
+    vm.runInContext(fs.readFileSync(path.join(root,'js/fotos-todas.js'),'utf8'),context);
+    context.window.SELECTOR_MODO='todas';
+    vm.runInContext(code,context);
+  } else if(modo==='cliente+todas'){
+    vm.createContext(context);
+    vm.runInContext(fs.readFileSync(path.join(root,'js/fotos-todas.js'),'utf8'),context);
+    vm.runInContext(code,context);
+  } else { vm.createContext(context);vm.runInContext(code,context); }
   return {run:s=>vm.runInContext(s,context),cards,requests};
 }
 test('Only the 597 delivered photos (94 sesión + 503 fiesta) render, with their matching thumbnails',()=>{
@@ -65,4 +74,35 @@ test('Saving a replacement keeps the old cloud identifier without deleting hidde
   const rows=JSON.parse(requests[0].options.body);
   assert.deepEqual(rows.map(r=>r.foto_index),[0,69]);
   assert.equal(rows[1].invitacion,true);
+});
+
+test('todas.html shows all 1,327 photos from imagenes/ with thumbnails',()=>{
+  const {run,cards}=setup('todas');run('renderGallery()');assert.equal(cards.length,1327);
+  assert.match(cards[0].innerHTML,/imagenes\/thumb\/IMG_0528.webp/);
+  const todas=JSON.parse(fs.readFileSync(path.join(root,'js/fotos-todas.json')));
+  assert.equal(new Set(todas.map(p=>p.index)).size,1327);
+  for(const photo of todas){
+    assert.ok(fs.existsSync(path.join(root,photo.file)),photo.file);
+    assert.ok(fs.existsSync(path.join(root,photo.file.replace(/([^/]+)$/,'thumb/$1'))),photo.file);
+  }
+});
+test('Same photo number shares the selection index between both selectors',()=>{
+  const cliente=JSON.parse(fs.readFileSync(path.join(root,'js/fotos-cliente.json')));
+  const todas=JSON.parse(fs.readFileSync(path.join(root,'js/fotos-todas.json')));
+  const num=f=>f.match(/IMG_(\d+)/)[1];
+  const byNum=new Map(todas.map(p=>[num(p.file),p.index]));
+  for(const c of cliente) assert.equal(byNum.get(num(c.file)),c.index,c.file);
+  assert.equal(todas.filter(p=>p.index<10000).length,597);
+  const {run}=setup('todas');
+  assert.match(run('photos[69]'),/imagenes\/IMG_0597.webp/);
+  assert.match(run('photos[10528]'),/imagenes\/IMG_0528.webp/);
+});
+test('The 200 print limit counts marks made in both selectors together',()=>{
+  for(const modo of ['cliente+todas','todas']){
+    const {run}=setup(modo);
+    run('photoSelections={10:{impresion:true},10528:{impresion:true},17304:{impresion:true}}');
+    assert.equal(JSON.parse(run('JSON.stringify(getStats())')).impresion,3,modo);
+    const report=run('generateTextSummary(true)');
+    assert.match(report,/IMG_0528 \(de todas\)/);assert.match(report,/IMG_0538\b/);
+  }
 });

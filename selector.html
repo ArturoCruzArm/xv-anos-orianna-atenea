@@ -10,13 +10,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="css/selector.css?v=20261122-fiesta2">
+    <link rel="stylesheet" href="css/selector.css?v=20261124-todas">
+    <style>
+        .selector-switch{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px auto 0;max-width:640px}
+        .selector-switch a{flex:1;min-width:150px;text-align:center;padding:10px 14px;border-radius:24px;text-decoration:none;font-weight:700;font-size:.9rem;border:2px solid rgba(255,255,255,.6);color:inherit;background:rgba(255,255,255,.12)}
+        .selector-switch a.active{background:#fff;color:#24306e;border-color:#fff}
+        .selector-switch small{display:block;font-weight:400;font-size:.75rem;opacity:.8}
+        .selector-note{text-align:center;font-size:.85rem;opacity:.85;margin-top:8px}
+    </style>
 </head>
 <body>
     <header class="header">
         <h1 class="main-title">Orianna Atenea García Loera</h1>
         <p class="subtitle">XV Años · 597 fotos (sesión y fiesta)</p>
         <p class="instructions">Selecciona las fotos para impresión (200 incluidas en tu paquete)</p>
+        <nav class="selector-switch" aria-label="Cambiar de selector">
+            <a href="selector.html" class="active">✨ Fotos editadas<small>597 de la sesión y la fiesta</small></a>
+            <a href="todas.html">🗂️ Todas las fotos<small>1,327 sin editar</small></a>
+        </nav>
+        <p class="selector-note">Tus marcas se comparten entre los dos: una foto marcada aquí aparece marcada en el otro y las 200 de impresión cuentan juntas.</p>
     </header>
 
     <div class="container">
@@ -117,8 +129,9 @@
 
     <div class="toast" id="toast"></div>
     <script>window.EVENT_CONFIG = { telefono: "524775629388", nombre: "Orianna Atenea García Loera", fechaEvento: new Date(2026, 10, 21, 19, 0, 0), costoFotoAdicional: 15 };</script>
-    <script src="js/selector.js?v=20261122-fiesta2"></script>
-    <script src="js/visitas.js?v=20261122-fiesta2"></script>
-<script src="js/foro7-footer.js?v=20261122-fiesta2"></script>
+    <script src="js/fotos-todas.js?v=20261124-todas"></script>
+    <script src="js/selector.js?v=20261124-todas"></script>
+    <script src="js/visitas.js?v=20261124-todas"></script>
+<script src="js/foro7-footer.js?v=20261124-todas"></script>
 </body>
 </html>

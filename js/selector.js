@@ -2432,9 +2432,20 @@ const photoCatalog = [
     "file": "imagenes/cliente/IMG_8418.webp"
   }
 ];
+// Dos selectores comparten la misma selección (mismo localStorage y misma tabla en Supabase):
+//   selector.html → fotos de imagenes/cliente (editadas)
+//   todas.html    → todas las fotos de imagenes/ (window.SELECTOR_MODO = 'todas')
+// Una foto con el mismo número (IMG_####) usa el mismo índice en ambos, así que marcarla
+// en uno la marca en el otro, y el límite de impresión cuenta las dos selecciones juntas.
+const MODO_TODAS = window.SELECTOR_MODO === 'todas';
+const fotosTodas = Array.isArray(window.FOTOS_TODAS) ? window.FOTOS_TODAS : [];
+const enCliente = new Set(photoCatalog.map(photo => photo.index));
 const photos = [];
-photoCatalog.forEach(({index, file}) => { photos[index] = file; });
-const visiblePhotoIndexes = photoCatalog.map(photo => photo.index);
+const catalogoVisible = MODO_TODAS ? fotosTodas : photoCatalog;
+const catalogoOtro    = MODO_TODAS ? photoCatalog : fotosTodas;
+catalogoOtro.forEach(({index, file}) => { photos[index] = file; });
+catalogoVisible.forEach(({index, file}) => { photos[index] = file; });
+const visiblePhotoIndexes = catalogoVisible.map(photo => photo.index);
 const photoNumber = index => visiblePhotoIndexes.indexOf(index) + 1;
 
 // Miniatura (300 px) para la cuadrícula; la foto completa se usa en el visor y la descarga
@@ -2527,7 +2538,7 @@ async function loadSelections(isPoll = false) {
             if (Object.keys(photoSelections).length > 0) {
                 sbSyncSelections().catch(e => console.warn('[Supabase] Migración:', e.message));
             }
-            sbRegistrarVisita('selector');
+            sbRegistrarVisita(MODO_TODAS ? 'selector-todas' : 'selector');
             mostrarBannerSinSeleccion();
         } else {
             // Polling: Supabase es la verdad compartida, reemplaza estado local
@@ -2728,7 +2739,8 @@ function renderGallery() {
         return;
     }
 
-    photos.forEach((photo, index) => {
+    visiblePhotoIndexes.forEach(index => {
+        const photo = photos[index];
         const selection = photoSelections[index] || {};
         const hasAny = selection.impresion || selection.invitacion || selection.descartada;
 
@@ -2755,7 +2767,7 @@ function renderGallery() {
             badgesHTML += '</div>';
         }
 
-        const displayNumber = `Foto ${photoNumber(index)} · ${fileOf(photo)}`;
+        const displayNumber = `Foto ${photoNumber(index)} · ${fileOf(photo)}${MODO_TODAS && enCliente.has(index) ? ' · ✨' : ''}`;
         const mediaHTML = `
             <div class="photo-image-container">
                 <img data-src="${thumbOf(photo)}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'/%3E" alt="${displayNumber}" class="lazy-img">
@@ -3026,7 +3038,7 @@ function generateTextSummary(detalle = false) {
     if (detalle) {
         const lista = (cat) => photos.map((p, i) => ({ p, i }))
             .filter(({ i }) => photoSelections[i] && photoSelections[i][cat])
-            .map(({ p, i }) => `   Foto ${photoNumber(i)} (${fileOf(p)})`).join('\n') || '   (ninguna)';
+            .map(({ p, i }) => `   ${fileOf(p)}${enCliente.has(i) ? '' : ' (de todas)'}`).join('\n') || '   (ninguna)';
         summary += `📸 FOTOS PARA IMPRESIÓN:\n${lista('impresion')}\n\n`;
         summary += `💌 FOTOS PARA INVITACIÓN:\n${lista('invitacion')}\n\n`;
     }

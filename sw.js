@@ -1,4 +1,4 @@
-const CACHE_SHELL = 'atenea-shell-v20261122-fiesta2';
+const CACHE_SHELL = 'atenea-shell-v20261124-todas';
 const CACHE_IMAGES = 'atenea-images-v20261118-cliente2';
 
 self.addEventListener('install', event => {
@@ -6,6 +6,8 @@ self.addEventListener('install', event => {
         caches.open(CACHE_SHELL).then(cache =>
             cache.addAll([
                 './selector.html',
+                './todas.html',
+                './js/fotos-todas.js',
                 './index.html',
                 './contrato.html',
                 './logistica.html',
